@@ -1,0 +1,6 @@
+{
+  "name": "IMG Safe Portfolio",
+  "description": "Professional portfolio website for IMG Safe (Incident Management Global), showcasing incident management, safety equipment trading, consulting, and logistics services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
