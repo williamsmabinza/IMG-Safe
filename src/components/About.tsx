@@ -58,7 +58,7 @@ export default function About() {
               <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-3 shadow-md">
                 <HeartPulse className="w-5 h-5 text-emerald-400 shrink-0" />
                 <div>
-                  <div className="font-display font-bold text-white text-sm">HES Auditing</div>
+                  <div className="font-display font-bold text-white text-sm">HSE Auditing</div>
                   <div className="text-xs text-slate-400">Strict Guidelines</div>
                 </div>
               </div>
@@ -273,7 +273,7 @@ export default function About() {
               <div className="p-2.5 rounded-xl bg-blue-950/60 text-blue-400 border border-blue-900/40 w-fit">
                 <ShieldAlert className="w-5 h-5" />
               </div>
-              <h4 className="font-display font-semibold text-lg text-white">Health, Safety & Environment (HES)</h4>
+              <h4 className="font-display font-semibold text-lg text-white">Health, Safety & Environment (HSE)</h4>
               <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
                 {companyDetails.healthSafety} We develop, mandate, and verify precise safety programs to keep operations error-free under hazardous conditions.
               </p>
@@ -284,7 +284,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                  <span>Continuous monitoring of HES metrics in real time</span>
+                  <span>Continuous monitoring of HSE metrics in real time</span>
                 </div>
               </div>
             </div>

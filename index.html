@@ -1,13 +1,1877 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <title>IMG Safe - Incident Management Global</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons Browser Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              slate: {
+                150: '#1E293B',
+                200: '#1E293B',
+                250: '#1E293B',
+                300: '#334155',
+                350: '#475569',
+                400: '#475569',
+                450: '#64748b',
+                550: '#475569',
+                800: '#E2E8F0',
+                850: '#F1F5F9',
+                900: '#F8FAFC',
+                950: '#FFFFFF'
+              },
+              blue: {
+                950: '#EAF4FF',
+                900: '#E2E8F0',
+                800: '#93C5FD',
+                700: '#1D4ED8',
+                600: '#0A66C2',
+                500: '#0F3D91'
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Custom CSS Animations & Base Settings -->
+    <style>
+      @keyframes float {
+        0%, 100% { transform: translateY(0) rotateY(-3deg) rotateX(-1.5deg) scale(1); }
+        50% { transform: translateY(-14px) rotateY(3deg) rotateX(1.5deg) scale(1.015); }
+      }
+      .animate-float-3d {
+        animation: float 7s ease-in-out infinite;
+        transform-style: preserve-3d;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #F8FAFC;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #CBD5E1;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94A3B8;
+      }
+
+      /* Light Theme overrides to align with user requested scheme */
+      body {
+        background-color: #FFFFFF !important;
+        color: #1E293B !important;
+      }
+
+      section, .bg-\[\#040814\], .bg-slate-950 {
+        background-color: #FFFFFF !important;
+        color: #1E293B !important;
+      }
+
+      #about, #contact, .bg-\[\#0b1222\], .bg-[#0b1222] {
+        background-color: #F8FAFC !important;
+        color: #1E293B !important;
+      }
+
+      #app-header {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #E2E8F0 !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+      }
+
+      nav.bg-slate-900\/60, nav {
+        background-color: #EAF4FF !important;
+        border-color: #E2E8F0 !important;
+      }
+
+      .nav-tab {
+        color: #1E293B !important;
+      }
+      .nav-tab:hover {
+        color: #0A66C2 !important;
+      }
+
+      #header-cta-btn, #mobile-menu-toggle {
+        background-color: #EAF4FF !important;
+        color: #0A66C2 !important;
+        border-color: #E2E8F0 !important;
+      }
+      #header-cta-btn:hover, #mobile-menu-toggle:hover {
+        background-color: #0A66C2 !important;
+        color: #FFFFFF !important;
+      }
+
+      #mobile-nav-panel, .bg-\[\#080e1a\], .bg-\[\#080e1a\]\/95 {
+        background-color: #FFFFFF !important;
+        border-color: #E2E8F0 !important;
+        color: #1E293B !important;
+      }
+
+      /* Text & Headings inside light sections to be high-contrast dark slate */
+      #hero h1, #hero h2, #hero h3, #hero h4, #hero h5, #hero h6,
+      #about h1, #about h2, #about h3, #about h4, #about h5, #about h6,
+      #services h1, #services h2, #services h3, #services h4, #services h5, #services h6,
+      #contact h1, #contact h2, #contact h3, #contact h4, #contact h5, #contact h6 {
+        color: #1E293B !important;
+      }
+
+      /* Specific elements inside light sections that have helper classes */
+      #hero .text-white, #about .text-white, #services .text-white, #contact .text-white {
+        color: #1E293B !important;
+      }
+
+      #hero h1 {
+        color: #0F3D91 !important;
+      }
+
+      .bg-blue-600 {
+        background-color: #0A66C2 !important;
+        color: #FFFFFF !important;
+      }
+      .bg-blue-600:hover {
+        background-color: #0F3D91 !important;
+      }
+      .border-blue-600\/80 {
+        border-color: #0A66C2 !important;
+        color: #0A66C2 !important;
+      }
+      .border-blue-600\/80:hover {
+        background-color: #EAF4FF !important;
+      }
+
+      /* Ensure active button labels inside light sections are white */
+      #hero button.bg-blue-600, #hero button.bg-blue-600 *,
+      #about button.bg-blue-600, #about button.bg-blue-600 *,
+      #services button.bg-blue-600, #services button.bg-blue-600 *,
+      #contact button.bg-blue-600, #contact button.bg-blue-600 * {
+        color: #FFFFFF !important;
+      }
+
+      .bg-slate-900\/60, .bg-blue-950\/60, .bg-slate-950\/80, .bg-slate-950\/60, .bg-slate-900\/40,
+      .bg-\[\#0e1626\]\/80, .bg-\[\#0e1626\]\/90, .bg-\[\#0e1626\], .bg-\[\#111a2d\], .bg-\[\#080e1a\]\/95 {
+        background-color: #FFFFFF !important;
+        border-color: #E2E8F0 !important;
+        color: #1E293B !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+      }
+
+      /* Highly visible text slate and blue utility overrides on light backgrounds */
+      #hero .text-slate-400, #hero .text-slate-350, #hero .text-slate-300, #hero .text-slate-500, #hero .text-slate-600,
+      #about .text-slate-400, #about .text-slate-350, #about .text-slate-300, #about .text-slate-500, #about .text-slate-600,
+      #services .text-slate-400, #services .text-slate-350, #services .text-slate-300, #services .text-slate-500, #services .text-slate-600,
+      #contact .text-slate-400, #contact .text-slate-350, #contact .text-slate-300, #contact .text-slate-500, #contact .text-slate-600 {
+        color: #475569 !important;
+      }
+
+      #hero .text-blue-400, #hero .text-blue-300, #hero .text-cyan-400,
+      #about .text-blue-400, #about .text-blue-300, #about .text-cyan-400,
+      #services .text-blue-400, #services .text-blue-300, #services .text-cyan-400,
+      #contact .text-blue-400, #contact .text-blue-300, #contact .text-cyan-400 {
+        color: #0A66C2 !important;
+      }
+
+      /* Service View Switcher bar and tabs styling */
+      .service-view-tab, [id^="services-tab-"] {
+        background-color: transparent !important;
+        color: #475569 !important;
+      }
+      .service-view-tab:hover, [id^="services-tab-"]:hover {
+        background-color: #E2E8F0 !important;
+        color: #1E293B !important;
+      }
+      .service-view-tab[class*="bg-blue-600"], [id^="services-tab-"][class*="bg-blue-600"],
+      #services-tab-services.bg-blue-600, #services-tab-products.bg-blue-600, #services-tab-sectors.bg-blue-600, #services-tab-clients.bg-blue-600 {
+        background-color: #0A66C2 !important;
+        color: #FFFFFF !important;
+      }
+      .service-view-tab[class*="bg-blue-600"] *, [id^="services-tab-"][class*="bg-blue-600"] *,
+      #services-tab-services.bg-blue-600 *, #services-tab-products.bg-blue-600 *, #services-tab-sectors.bg-blue-600 *, #services-tab-clients.bg-blue-600 * {
+        color: #FFFFFF !important;
+      }
+
+      /* Hover backgrounds and active tabs */
+      .hover\:bg-\[\#111a2d\]:hover {
+        background-color: #EAF4FF !important;
+        border-color: #93C5FD !important;
+      }
+
+      #app-footer, .bg-\[\#080d1a\], footer {
+        background-color: #0F3D91 !important;
+        color: #EAF4FF !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+      }
+      #app-footer h1, #app-footer h2, #app-footer h3, #app-footer h4, #app-footer h5, #app-footer h6, #app-footer .text-white, #app-footer strong {
+        color: #FFFFFF !important;
+      }
+      #app-footer span, #app-footer p, #app-footer a, #app-footer button, #app-footer div, #app-footer li {
+        color: #EAF4FF !important;
+      }
+      #app-footer .text-slate-300, #app-footer .text-slate-400, #app-footer .text-slate-500, #app-footer .text-slate-550, #app-footer .text-slate-600 {
+        color: #EAF4FF !important;
+      }
+      #app-footer button:hover, #app-footer a:hover, #app-footer .hover\:text-blue-400:hover {
+        color: #93C5FD !important;
+        opacity: 1;
+      }
+
+      input, textarea, select {
+        background-color: #FFFFFF !important;
+        border-color: #E2E8F0 !important;
+        color: #1E293B !important;
+      }
+      input:focus, textarea:focus, select:focus {
+        border-color: #0A66C2 !important;
+        outline: none;
+      }
+
+      .bg-slate-950\/60 {
+        background-color: #EAF4FF !important;
+        border-color: #E2E8F0 !important;
+      }
+      .bg-slate-950\/60 span, .bg-slate-950\/60 i {
+        color: #0F3D91 !important;
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="min-h-screen bg-[#040814] text-slate-150 font-sans selection:bg-blue-600 selection:text-white overflow-x-hidden custom-scrollbar">
+
+    <!-- 1. STICKY HEADER -->
+    <header id="app-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5">
+      <!-- Slim scroll progress bar -->
+      <div id="header-scroll-progress" class="absolute top-0 left-0 h-[3px] bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-500 transition-all duration-75 ease-out z-50 w-0"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+          <!-- Logo Brand -->
+          <div onclick="scrollToSection('hero')" class="flex items-center gap-3 cursor-pointer group">
+            <div id="header-logo-container" class="relative flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              <!-- Inline SVG Shield Logo -->
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="font-display font-bold text-xl tracking-wide text-white">IMG SAFE</span>
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+              </div>
+              <span class="block text-[10px] font-mono tracking-wider text-slate-400 uppercase leading-none">
+                Incident Management Global
+              </span>
+            </div>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex items-center bg-slate-900/60 p-1 rounded-full border border-slate-800 shadow-inner backdrop-blur-sm">
+            <button onclick="scrollToSection('hero')" id="nav-tab-hero" class="nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-white bg-blue-600 shadow-md shadow-blue-600/30">
+              Home
+            </button>
+            <button onclick="scrollToSection('about')" id="nav-tab-about" class="nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white">
+              Our Team
+            </button>
+            <button onclick="scrollToSection('services')" id="nav-tab-services" class="nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white">
+              Services & Products
+            </button>
+            <button onclick="scrollToSection('contact')" id="nav-tab-contact" class="nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white">
+              Inquiries & Contact
+            </button>
+          </nav>
+
+          <!-- Contact Button -->
+          <div class="hidden md:block">
+            <button onclick="scrollToSection('contact')" class="relative inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/60 border border-slate-800 text-sm font-medium text-slate-200 hover:text-white hover:border-slate-700 hover:bg-slate-900 transition shadow-sm group">
+              <i data-lucide="phone-call" class="w-4 h-4 text-blue-500 group-hover:scale-110 transition duration-300"></i>
+              <span>Get in Touch</span>
+            </button>
+          </div>
+
+          <!-- Mobile Menu Toggle -->
+          <div class="md:hidden">
+            <button onclick="toggleMobileMenu()" id="mobile-menu-toggle" class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition shadow-sm">
+              <i data-lucide="menu" id="menu-icon" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Panel -->
+      <div id="mobile-nav-panel" class="hidden md:hidden bg-[#080e1a] border-b border-slate-800/90 shadow-2xl transition-all duration-300">
+        <div class="px-4 pt-2 pb-6 space-y-2">
+          <button onclick="scrollToSection('hero')" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between bg-blue-950/40 text-blue-400 border border-blue-900/40">
+            <span>Home</span><span class="w-2 h-2 rounded-full bg-blue-500"></span>
+          </button>
+          <button onclick="scrollToSection('about')" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between text-slate-400 hover:bg-slate-900 hover:text-white border border-transparent">
+            <span>Our Team</span>
+          </button>
+          <button onclick="scrollToSection('services')" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between text-slate-400 hover:bg-slate-900 hover:text-white border border-transparent">
+            <span>Services & Products</span>
+          </button>
+          <button onclick="scrollToSection('contact')" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between text-slate-400 hover:bg-slate-900 hover:text-white border border-transparent">
+            <span>Inquiries & Contact</span>
+          </button>
+          <div class="pt-4 px-4">
+            <button onclick="scrollToSection('contact')" class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-center flex items-center justify-center gap-2 transition shadow-lg shadow-blue-600/20">
+              <i data-lucide="phone-call" class="w-4 h-4"></i>
+              <span>Contact Our Team</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section id="hero" class="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#040814] pt-28 pb-16 px-4 sm:px-6 lg:px-8 border-b border-slate-900">
+      <!-- Background glows -->
+      <div class="absolute inset-0 pointer-events-none select-none z-0">
+        <div class="absolute top-[15%] left-[5%] w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] rounded-full bg-blue-600/10 blur-[120px]"></div>
+        <div class="absolute bottom-[15%] right-[5%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] rounded-full bg-cyan-600/5 blur-[120px]"></div>
+        <div class="absolute inset-0 opacity-[0.08]" style="background-image: radial-gradient(#2563eb 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
+      </div>
+
+      <!-- Hero Content Grid -->
+      <div class="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto py-12">
+        <!-- Left Content -->
+        <div class="lg:col-span-7 space-y-8 text-left">
+          <!-- Logo Brand Heading -->
+          <div class="flex items-center gap-3">
+            <div id="hero-mini-logo-container" class="p-1.5 rounded-lg bg-blue-950/40 border border-blue-900/30 shadow-md">
+              <!-- Mini logo injected here -->
+            </div>
+            <div>
+              <span class="font-display font-bold text-2xl tracking-wide text-white block leading-none">IMG SAFE</span>
+              <span class="block text-[10px] sm:text-[11px] font-mono tracking-widest text-blue-400 uppercase leading-none mt-1.5">
+                Incident Management Global
+              </span>
+            </div>
+          </div>
+
+          <!-- Headline -->
+          <div class="space-y-4">
+            <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-[1.1] uppercase">
+              Safer Operations.<br />Stronger Outcomes.
+            </h1>
+            <div class="h-[2px] w-48 bg-gradient-to-r from-blue-600 via-sky-400 to-transparent rounded-full"></div>
+          </div>
+
+          <!-- Slogan -->
+          <p class="text-slate-200 text-sm sm:text-base md:text-lg max-w-xl font-sans leading-relaxed">
+            Global incident management solutions that protect people, strengthen response, and drive continuous improvement.
+          </p>
+
+          <!-- Attributes Row -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-slate-900">
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-xl bg-blue-950/60 border border-blue-900/40 text-blue-400 shrink-0">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+              </div>
+              <div class="font-mono text-[10px] sm:text-xs leading-snug font-bold uppercase">
+                <span class="block text-slate-400 font-normal">Risk</span>
+                <span class="text-white block tracking-widest">Risk Ready</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-xl bg-blue-950/60 border border-blue-900/40 text-blue-400 shrink-0">
+                <i data-lucide="target" class="w-5 h-5"></i>
+              </div>
+              <div class="font-mono text-[10px] sm:text-xs leading-snug font-bold uppercase">
+                <span class="block text-slate-400 font-normal">Rapid</span>
+                <span class="text-white block tracking-widest">Response</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-xl bg-blue-950/60 border border-blue-900/40 text-blue-400 shrink-0">
+                <i data-lucide="trending-up" class="w-5 h-5"></i>
+              </div>
+              <div class="font-mono text-[10px] sm:text-xs leading-snug font-bold uppercase">
+                <span class="block text-slate-400 font-normal">Measurable</span>
+                <span class="text-white block tracking-widest">Impact</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-xl bg-blue-950/60 border border-blue-900/40 text-blue-400 shrink-0">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+              </div>
+              <div class="font-mono text-[10px] sm:text-xs leading-snug font-bold uppercase">
+                <span class="block text-slate-400 font-normal">Global</span>
+                <span class="text-white block tracking-widest">Coverage</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <button onclick="scrollToSection('services')" class="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 group shadow-lg shadow-blue-600/20 hover:shadow-blue-600/35 transition duration-300">
+              <span>Explore Sourcing</span>
+              <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform"></i>
+            </button>
+            <button onclick="scrollToSection('contact')" class="px-8 py-4 rounded-xl bg-transparent border border-blue-600/80 hover:border-blue-500 text-white hover:bg-blue-950/40 font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition duration-300 shadow-md">
+              <span>Request Quote</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Graphic Column -->
+        <div class="lg:col-span-5 relative h-[400px] sm:h-[500px] w-full flex items-center justify-center">
+          <div class="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl border border-slate-900/80 bg-slate-950/40 backdrop-blur-sm shadow-2xl">
+            <div class="absolute top-[-20%] left-[-20%] w-[140%] h-[140%] bg-gradient-to-br from-slate-950/95 via-slate-900/40 to-slate-950/95 skew-x-[-15deg] border-r border-slate-900/60 shadow-inner z-0"></div>
+            <div class="absolute bottom-[20%] left-[-20%] w-[160%] h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent rotate-[-15deg] blur-[1px] shadow-[0_0_15px_#2563eb] opacity-80 z-10"></div>
+            <div class="absolute top-[25%] left-[-20%] w-[160%] h-[3px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent rotate-[-15deg] blur-[2px] shadow-[0_0_20px_#06b6d4] opacity-70 z-10"></div>
+            <div class="absolute top-[25%] left-[25%] w-[250px] h-[250px] rounded-full bg-blue-600/15 blur-[100px] z-0"></div>
+          </div>
+          <div class="absolute inset-4 opacity-[0.22] pointer-events-none z-0" style="background-image: radial-gradient(#2563eb 1.5px, transparent 1.5px); background-size: 16px 16px;"></div>
+          
+          <!-- 3D Float Logo container -->
+          <div id="hero-giant-logo-container" class="relative z-10 flex items-center justify-center cursor-pointer animate-float-3d group">
+            <!-- Giant SVG Logo injected here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Slogan Bottom Strip -->
+      <div class="w-full border-t border-slate-900/60 bg-slate-950/60 backdrop-blur-md py-4 mt-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] sm:text-xs font-mono text-slate-400">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="shield" class="w-4 h-4 text-blue-400 shrink-0"></i>
+            <span class="font-bold text-white tracking-wider">ONE STANDARD. ONE RESPONSE.</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+            <span class="text-cyan-400 font-bold tracking-widest uppercase">ONE GLOBAL COMMITMENT TO SAFETY.</span>
+          </div>
+          <div class="flex items-center gap-2 tracking-widest text-slate-300 font-bold uppercase">
+            <span>PREPARE. RESPOND. RECOVER. IMPROVE.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ABOUT SECTION -->
+    <section id="about" class="relative py-24 bg-[#0b1222] border-t border-slate-900 overflow-hidden">
+      <!-- Background decorations -->
+      <div class="absolute top-[20%] right-[-10%] w-[400px] h-[400px] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none"></div>
+      <div class="absolute bottom-[10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Title -->
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <span class="font-mono text-xs text-blue-400 uppercase tracking-widest font-bold">A WORD FROM OUR TEAM</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">Built on Trust, Sourced with Responsibility</h2>
+          <div class="h-1 w-20 bg-blue-600 mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Corporate Message & Switcher tabs -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-24">
+          <!-- Left Column -->
+          <div class="lg:col-span-6 space-y-6">
+            <h3 class="font-display font-semibold text-2xl text-white">Protecting What Matters Most</h3>
+            <p id="about-summary-text" class="text-slate-300 font-sans leading-relaxed text-sm sm:text-base"></p>
+            <p id="about-long-text" class="text-slate-300 font-sans leading-relaxed text-sm sm:text-base"></p>
+
+            <div class="grid grid-cols-2 gap-4 pt-4">
+              <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-3 shadow-md">
+                <i data-lucide="heart-pulse" class="w-5 h-5 text-emerald-400 shrink-0"></i>
+                <div>
+                  <div class="font-display font-bold text-white text-sm">HSE Auditing</div>
+                  <div class="text-xs text-slate-400">Strict Guidelines</div>
+                </div>
+              </div>
+              <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center gap-3 shadow-md">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-400 shrink-0"></i>
+                <div>
+                  <div class="font-display font-bold text-white text-sm">Expert Advisors</div>
+                  <div class="text-xs text-slate-400">Global Experience</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Switcher Tabs -->
+          <div class="lg:col-span-6">
+            <div class="bg-[#0e1626]/90 border border-slate-800 shadow-2xl rounded-2xl p-6 sm:p-8 backdrop-blur-md">
+              <div class="flex border-b border-slate-800 pb-3 gap-2">
+                <button onclick="setActiveAboutTab('mission')" id="btn-tab-mission" class="about-tab-btn px-4 py-2 text-xs sm:text-sm font-mono uppercase tracking-wider rounded-lg font-medium transition duration-300 bg-blue-950/60 text-blue-400 border border-blue-900/40">
+                  Our Mission
+                </button>
+                <button onclick="setActiveAboutTab('vision')" id="btn-tab-vision" class="about-tab-btn px-4 py-2 text-xs sm:text-sm font-mono uppercase tracking-wider rounded-lg font-medium transition duration-300 text-slate-400 hover:text-white hover:bg-slate-900">
+                  Our Vision
+                </button>
+                <button onclick="setActiveAboutTab('strategy')" id="btn-tab-strategy" class="about-tab-btn px-4 py-2 text-xs sm:text-sm font-mono uppercase tracking-wider rounded-lg font-medium transition duration-300 text-slate-400 hover:text-white hover:bg-slate-900">
+                  Our Strategy
+                </button>
+              </div>
+
+              <!-- About panels -->
+              <div class="mt-6 min-h-[220px]">
+                <!-- Mission Panel -->
+                <div id="panel-mission" class="about-panel space-y-4">
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-blue-950 text-blue-400 border border-blue-900/30">
+                      <i data-lucide="target" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-display font-semibold text-white">Our Mission Statement</h4>
+                  </div>
+                  <p id="mission-text-quote" class="text-sm text-slate-300 font-sans leading-relaxed italic"></p>
+                  <ul id="mission-bullet-points" class="space-y-2.5 pt-2"></ul>
+                </div>
+
+                <!-- Vision Panel -->
+                <div id="panel-vision" class="about-panel hidden space-y-4">
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-blue-950 text-blue-400 border border-blue-900/30">
+                      <i data-lucide="eye" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-display font-semibold text-white">Our Vision</h4>
+                  </div>
+                  <p class="text-sm text-slate-300 font-sans leading-relaxed">
+                    At IMG Safe, our vision is built on continuous improvement and proactive adaptation. We keep ourselves at the forefront of global development to provide state-of-the-art solutions that answer to client expectations precisely.
+                  </p>
+                  <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800">
+                    <p id="vision-text-quote" class="text-xs sm:text-sm text-slate-200 font-medium font-mono leading-relaxed text-center italic"></p>
+                  </div>
+                  <p class="text-xs text-slate-400 leading-relaxed font-sans">
+                    Our growth is an direct response to the safety requirements, technologies, and rigorous compliance demanded by international clients.
+                  </p>
+                </div>
+
+                <!-- Strategy Panel -->
+                <div id="panel-strategy" class="about-panel hidden space-y-4">
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-xl bg-amber-950/60 text-amber-400 border border-amber-900/40">
+                      <i data-lucide="settings" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-display font-semibold text-white">Strategic Sourcing & Adaptation</h4>
+                  </div>
+                  <p id="strategy-text-para" class="text-sm text-slate-300 font-sans leading-relaxed"></p>
+                  <div class="space-y-2 pt-1 text-xs text-slate-400 font-sans">
+                    <p>We utilize accumulated expertise, localized knowledge, and a strong network of supply partnerships to deliver:</p>
+                    <div class="grid grid-cols-2 gap-2 pt-2 text-[11px] text-slate-300 font-mono">
+                      <div class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div><span>Flexible Sourcing</span></div>
+                      <div class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div><span>R&D Insight</span></div>
+                      <div class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-amber-500"></div><span>Local Delivery</span></div>
+                      <div class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-cyan-500"></div><span>Skills Transfer</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Values -->
+        <div class="space-y-12">
+          <div class="text-center max-w-2xl mx-auto space-y-3">
+            <h3 class="font-display font-bold text-2xl text-white">Our Core Business Values</h3>
+            <p class="text-sm text-slate-400 font-sans">These fundamental principles guide how we approach incident management, trade sourcing, and client partnerships.</p>
+          </div>
+          <div id="values-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- Policies Highlights -->
+        <div class="mt-24 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="p-8 rounded-2xl bg-[#0e1626]/80 border border-slate-850 shadow-2xl relative overflow-hidden group hover:border-emerald-500/20 transition duration-300">
+            <div class="flex flex-col gap-4">
+              <div class="p-2.5 rounded-xl bg-emerald-950/60 text-emerald-400 border border-emerald-900/40 w-fit">
+                <i data-lucide="leaf" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-display font-semibold text-lg text-white">Sustainability Mandate</h4>
+              <p id="sustainability-summary" class="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed"></p>
+              <div class="text-[11px] font-mono text-slate-400 space-y-1 pt-2 border-t border-slate-800">
+                <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span><span>Responsible management & operational practices</span></div>
+                <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span><span>Enduring relationships with global stakeholders</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-8 rounded-2xl bg-[#0e1626]/80 border border-slate-850 shadow-2xl relative overflow-hidden group hover:border-blue-500/20 transition duration-300">
+            <div class="flex flex-col gap-4">
+              <div class="p-2.5 rounded-xl bg-blue-950/60 text-blue-400 border border-blue-900/40 w-fit">
+                <i data-lucide="shield-alert" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-display font-semibold text-lg text-white">Health, Safety & Environment (HSE)</h4>
+              <p id="safety-summary-text" class="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed"></p>
+              <div class="text-[11px] font-mono text-slate-400 space-y-1 pt-2 border-t border-slate-800">
+                <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span><span>Rigorous safety training and team certification</span></div>
+                <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span><span>Continuous monitoring of HSE metrics in real time</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SERVICES & PRODUCTS SECTION -->
+    <section id="services" class="relative py-24 bg-[#080d1a] border-t border-slate-900 overflow-hidden">
+      <!-- Glow effects -->
+      <div class="absolute top-[30%] left-[-5%] w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[150px] pointer-events-none"></div>
+      <div class="absolute bottom-[20%] right-[-5%] w-[500px] h-[500px] rounded-full bg-cyan-600/5 blur-[150px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <span class="font-mono text-xs text-blue-400 uppercase tracking-widest font-bold">EXCELLENCE IN PRACTICE</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">Our Services & Products Catalog</h2>
+          <p class="text-sm text-slate-400 font-sans max-w-xl mx-auto">From professional safety advisory to physical sourcing and logistics, explore our complete operational capabilities.</p>
+          <div class="h-1 w-20 bg-blue-600 mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Central Switcher Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12 bg-slate-900/60 p-1.5 rounded-2xl border border-slate-800 max-w-2xl mx-auto shadow-inner backdrop-blur-sm">
+          <button onclick="setActiveServiceView('services')" id="services-tab-services" class="service-view-tab flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition duration-300 text-white bg-blue-600 shadow-lg shadow-blue-600/20">
+            <i data-lucide="briefcase" class="w-4 h-4"></i><span>Core Services</span>
+          </button>
+          <button onclick="setActiveServiceView('products')" id="services-tab-products" class="service-view-tab flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white">
+            <i data-lucide="shopping-cart" class="w-4 h-4"></i><span>Products Sourcing</span>
+          </button>
+          <button onclick="setActiveServiceView('sectors')" id="services-tab-sectors" class="service-view-tab flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white">
+            <i data-lucide="globe" class="w-4 h-4"></i><span>Key Sectors</span>
+          </button>
+          <button onclick="setActiveServiceView('clients')" id="services-tab-clients" class="service-view-tab flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white">
+            <i data-lucide="handshake" class="w-4 h-4"></i><span>Our Clients</span>
+          </button>
+        </div>
+
+        <!-- Service views container -->
+        <div class="min-h-[480px]">
+          <!-- Core Services Panel -->
+          <div id="service-view-panel-services" class="service-panel-view">
+            <div id="core-services-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+          </div>
+
+          <!-- Product Sourcing Panel -->
+          <div id="service-view-panel-products" class="service-panel-view hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <!-- Left Sidebar: product categories list -->
+              <div id="product-cat-sidebar" class="lg:col-span-4 space-y-2 bg-[#0e1626]/80 p-4 rounded-2xl border border-slate-800 shadow-2xl h-fit">
+                <span class="block px-3 pb-2 font-mono text-[10px] text-slate-500 tracking-wider uppercase border-b border-slate-800 mb-3">Product Sourcing Lines</span>
+                <!-- Sidebar buttons dynamically injected here -->
+              </div>
+              <!-- Right Detail area -->
+              <div class="lg:col-span-8">
+                <div id="product-category-details-panel" class="bg-[#0e1626]/80 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 h-full shadow-2xl backdrop-blur-md">
+                  <!-- Active Category Details injected here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Sectors Panel -->
+          <div id="service-view-panel-sectors" class="service-panel-view hidden space-y-6">
+            <div class="bg-[#0e1626]/80 border border-slate-800 p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 shadow-xl">
+              <div class="space-y-1">
+                <h3 class="font-display font-semibold text-lg text-white">Serving Global & Local Industries</h3>
+                <p class="text-xs text-slate-400 font-sans">Our operational model focuses on sector compliance, skills transfer, and robust protection systems.</p>
+              </div>
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-950/60 border border-blue-900/40 text-blue-400 font-mono text-xs uppercase shrink-0">
+                <span>14+ core sectors</span>
+              </div>
+            </div>
+            <div id="key-sectors-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+          </div>
+
+          <!-- Our Clients Panel -->
+          <div id="service-view-panel-clients" class="service-panel-view hidden space-y-8">
+            <div class="bg-[#0e1626]/80 border border-slate-800 p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+              <div class="space-y-1">
+                <h3 class="font-display font-semibold text-lg text-white">Our Established Client Portfolio</h3>
+                <p class="text-xs text-slate-400 font-sans">We have implemented safety compliance measures, delivered high-end consulting, and managed transport logistics for top-tier groups.</p>
+              </div>
+              <div class="font-mono text-xs text-slate-500 uppercase">EAST AFRICA • INTERNATIONAL COMPLIANCE</div>
+            </div>
+            <!-- Client Badges Grid -->
+            <div id="client-badges-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
+            <p class="text-center text-xs text-slate-400 font-sans max-w-xl mx-auto italic">
+              "Sustainable success requires the flexibility to adapt to a changing environment. We work collaboratively with our clients by bringing in the necessary expertise while the client drives the implementation."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CONTACT & INQUIRIES SECTION -->
+    <section id="contact" class="relative py-24 bg-[#0b1222] border-t border-slate-900 overflow-hidden">
+      <!-- Glow background -->
+      <div class="absolute top-[40%] right-[-15%] w-[400px] h-[400px] rounded-full bg-blue-600/5 blur-[120px] pointer-events-none"></div>
+      <div class="absolute bottom-[5%] left-[-15%] w-[400px] h-[400px] rounded-full bg-cyan-600/5 blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <span class="font-mono text-xs text-blue-400 uppercase tracking-widest font-bold">GET IN TOUCH</span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">Integrated Contact & Sourcing Hub</h2>
+          <p class="text-sm text-slate-400 font-sans max-w-xl mx-auto">Contact us for expert safety advising, request quotes, or schedule on-site training sessions.</p>
+          <div class="h-1 w-20 bg-blue-600 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+          <!-- Left Column -->
+          <div class="lg:col-span-5 space-y-8">
+            <div class="space-y-4">
+              <h3 class="font-display font-semibold text-2xl text-white">IMG Safe HQ Office</h3>
+              <p class="text-sm text-slate-300 leading-relaxed font-sans">
+                Our operations team is available Monday through Friday, 8:00 AM to 5:00 PM, and Saturday, 08:00 AM to 1:00 PM (EAT).
+              </p>
+            </div>
+
+            <!-- Detailed Contact Info items -->
+            <div class="space-y-6">
+              <!-- Physical Address -->
+              <div class="flex items-start gap-4">
+                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-blue-400 shrink-0 shadow-md">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div class="space-y-1">
+                  <span class="block text-xs font-mono text-blue-400 uppercase tracking-wider font-semibold">Physical Address</span>
+                  <span id="contact-address-text" class="block text-sm text-white font-sans font-medium"></span>
+                  <span id="contact-city-po" class="block text-xs text-slate-300 font-sans"></span>
+                </div>
+              </div>
+
+              <!-- Phones -->
+              <div class="flex items-start gap-4">
+                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-emerald-400 shrink-0 shadow-md">
+                  <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div class="space-y-1 w-full">
+                  <span class="block text-xs font-mono text-blue-400 uppercase tracking-wider font-semibold">Phone Calls (Standby)</span>
+                  <div id="contact-phones-list" class="flex flex-wrap gap-2 pt-1"></div>
+                </div>
+              </div>
+
+              <!-- WhatsApp chats -->
+              <div class="flex items-start gap-4">
+                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-green-400 shrink-0 shadow-md">
+                  <i data-lucide="message-square" class="w-5 h-5"></i>
+                </div>
+                <div class="space-y-1 w-full">
+                  <span class="block text-xs font-mono text-blue-400 uppercase tracking-wider font-semibold">WhatsApp Live Chat</span>
+                  <div id="contact-whatsapps-list" class="flex flex-wrap gap-2 pt-1"></div>
+                </div>
+              </div>
+
+              <!-- Email Sourcing -->
+              <div class="flex items-start gap-4">
+                <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-blue-400 shrink-0 shadow-md">
+                  <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+                <div class="space-y-1">
+                  <span class="block text-xs font-mono text-blue-400 uppercase tracking-wider font-semibold">Email Sourcing Desk</span>
+                  <a id="contact-email-link" href="" class="block text-sm text-white hover:text-blue-400 transition font-mono font-medium underline underline-offset-4"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Form -->
+          <div class="lg:col-span-7">
+            <div class="bg-[#0e1626]/95 border border-slate-850 p-6 sm:p-8 rounded-2xl shadow-2xl relative overflow-hidden">
+              <div class="absolute top-0 right-0 p-4 text-[9px] font-mono tracking-widest text-slate-500 uppercase">IMG ENCRYPTED SOURCING DESK</div>
+
+              <!-- Success Alert -->
+              <div id="form-success-banner" class="hidden mb-6 p-4 rounded-xl bg-emerald-950/80 border border-emerald-900/40 text-emerald-300 flex items-start gap-3">
+                <i data-lucide="check-circle-2" class="w-5 h-5 shrink-0 mt-0.5"></i>
+                <div>
+                  <div class="font-semibold text-sm">Inquiry Logged Successfully!</div>
+                  <div class="text-xs text-emerald-450 mt-1">Thank you. Your inquiry has been submitted and registered in our local system. We will contact you soon.</div>
+                </div>
+              </div>
+
+              <form id="contact-inquiry-form" onsubmit="handleInquirySubmit(event)" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div class="space-y-1.5">
+                    <label class="block text-xs font-mono text-slate-350 uppercase">Full Name</label>
+                    <input type="text" id="form-name" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-850 focus:border-blue-500 focus:bg-slate-950 text-white font-sans text-sm transition placeholder:text-slate-600 outline-none" placeholder="e.g. Juma Bakhresa" />
+                    <span id="err-name" class="text-[10px] text-rose-500 block"></span>
+                  </div>
+                  <div class="space-y-1.5">
+                    <label class="block text-xs font-mono text-slate-350 uppercase">Email Address</label>
+                    <input type="email" id="form-email" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-850 focus:border-blue-500 focus:bg-slate-950 text-white font-sans text-sm transition placeholder:text-slate-600 outline-none" placeholder="e.g. buyer@enterprise.com" />
+                    <span id="err-email" class="text-[10px] text-rose-500 block"></span>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div class="space-y-1.5">
+                    <label class="block text-xs font-mono text-slate-350 uppercase">Phone (Direct / Standby)</label>
+                    <input type="text" id="form-phone" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-850 focus:border-blue-500 focus:bg-slate-950 text-white font-sans text-sm transition placeholder:text-slate-600 outline-none" placeholder="e.g. +255 786 200 000" />
+                    <span id="err-phone" class="text-[10px] text-rose-500 block"></span>
+                  </div>
+                  <div class="space-y-1.5">
+                    <label class="block text-xs font-mono text-slate-350 uppercase">Primary Service Focus</label>
+                    <select id="form-serviceType" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-850 focus:border-blue-500 focus:bg-slate-950 text-white font-sans text-sm transition outline-none">
+                      <!-- Dynamically filled with options -->
+                    </select>
+                  </div>
+                </div>
+
+                <div class="space-y-1.5">
+                  <label class="block text-xs font-mono text-slate-350 uppercase">Inquiry Subject</label>
+                  <input type="text" id="form-subject" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-850 focus:border-blue-500 focus:bg-slate-950 text-white font-sans text-sm transition placeholder:text-slate-600 outline-none" placeholder="e.g. Sourcing Fire-Retardant Coveralls" />
+                  <span id="err-subject" class="text-[10px] text-rose-500 block"></span>
+                </div>
+
+                <div class="space-y-1.5">
+                  <label class="block text-xs font-mono text-slate-350 uppercase">Message & Technical Specs</label>
+                  <textarea id="form-message" rows="5" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-850 focus:border-blue-500 focus:bg-slate-950 text-white font-sans text-sm transition placeholder:text-slate-600 outline-none resize-none custom-scrollbar" placeholder="Details of requirements, sizes, quantites, delivery location..."></textarea>
+                  <span id="err-message" class="text-[10px] text-rose-500 block"></span>
+                </div>
+
+                <button type="submit" id="form-submit-btn" class="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold uppercase tracking-wider flex items-center justify-center gap-2 group transition duration-300 shadow-lg shadow-blue-600/20">
+                  <span id="btn-submit-text">Log Sourcing Inquiry</span>
+                  <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. ADMIN INBOX ACCORDION PANEL -->
+        <div class="mt-8">
+          <div class="max-w-4xl mx-auto">
+            <button onclick="toggleAdminInbox()" class="w-full flex items-center justify-between p-4 px-6 rounded-2xl bg-slate-950 border border-slate-900 hover:border-slate-800 transition shadow-lg text-slate-300 hover:text-white group">
+              <div class="flex items-center gap-3">
+                <i data-lucide="inbox" class="w-5 h-5 text-blue-400 group-hover:scale-110 transition duration-300"></i>
+                <div class="text-left">
+                  <span class="block text-sm font-display font-semibold uppercase tracking-wider">Inquiries Admin Inbox</span>
+                  <span class="block text-[10px] font-mono text-slate-500 uppercase">Review submitted enquiries in real-time (Local Storage persistence)</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span id="admin-inbox-stats-badge" class="px-2 py-0.5 rounded-full bg-blue-950 border border-blue-900/50 text-blue-400 font-mono text-[10px]">0 new</span>
+                <i data-lucide="chevron-down" id="admin-inbox-chevron" class="w-4 h-4 transition-transform duration-300"></i>
+              </div>
+            </button>
+
+            <!-- Admin Inbox Panel Content -->
+            <div id="admin-inbox-panel" class="hidden mt-4 bg-[#0e1626] border border-slate-850 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300">
+              <div class="p-4 px-6 bg-slate-950 border-b border-slate-900 flex justify-between items-center text-xs text-slate-450 font-mono uppercase">
+                <span>Inquiries Inbox Dashboard</span>
+                <button onclick="clearAllInquiries()" class="text-rose-400 hover:text-rose-300 transition flex items-center gap-1.5">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i><span>Clear All</span>
+                </button>
+              </div>
+
+              <!-- List container -->
+              <div id="admin-inquiries-list" class="divide-y divide-slate-900 max-h-[500px] overflow-y-auto custom-scrollbar">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer id="app-footer" class="bg-[#080d1a] border-t border-slate-900 pt-16 pb-8 text-slate-400 relative overflow-hidden">
+      <div class="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-blue-600/5 blur-[100px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-slate-900">
+          
+          <!-- Column 1 -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="flex items-center gap-3">
+              <div id="footer-logo-container" class="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 text-blue-400 shadow-md">
+                <!-- Mini shield logo in footer -->
+              </div>
+              <div>
+                <span class="font-display font-bold text-lg text-white tracking-wide">IMG SAFE</span>
+                <span class="block text-[10px] font-mono tracking-wider text-slate-500 uppercase leading-none mt-0.5">Incident Management Global</span>
+              </div>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">
+              We provide strategic safety counseling, high-end trade sourcing of protective gears, surveillance installation, and heavy transport logistics across local and international sectors.
+            </p>
+            <div class="flex items-center gap-2 pt-2 text-xs font-mono text-slate-500">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+              <span>HQ Coordinates: Dar Es Salaam, TZ</span>
+            </div>
+          </div>
+
+          <!-- Column 2 -->
+          <div class="lg:col-span-3 lg:pl-8 space-y-4">
+            <h4 class="font-display font-semibold text-white text-sm uppercase tracking-wider">Quick Directory</h4>
+            <ul class="space-y-3 text-xs sm:text-sm">
+              <li><button onclick="scrollToSection('hero')" class="text-slate-400 hover:text-blue-400 transition-colors text-left block">Home Landing</button></li>
+              <li><button onclick="scrollToSection('about')" class="text-slate-400 hover:text-blue-400 transition-colors text-left block">Word from Team & Values</button></li>
+              <li><button onclick="scrollToSection('services')" class="text-slate-400 hover:text-blue-400 transition-colors text-left block">Services & Products Catalog</button></li>
+              <li><button onclick="scrollToSection('contact')" class="text-slate-400 hover:text-blue-400 transition-colors text-left block">Inquiries & Contact Desk</button></li>
+            </ul>
+          </div>
+
+          <!-- Column 3 -->
+          <div class="lg:col-span-5 space-y-4">
+            <h4 class="font-display font-semibold text-white text-sm uppercase tracking-wider">Headquarters Location</h4>
+            <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-850 space-y-3 shadow-xl">
+              <!-- Custom wireframe map -->
+              <div class="relative h-28 w-full bg-slate-950 border border-slate-850 rounded-lg overflow-hidden flex items-center justify-center font-mono text-[10px] text-slate-500">
+                <div class="absolute inset-0 opacity-[0.05] invert" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 16px 16px;"></div>
+                <div class="absolute top-[40%] inset-x-0 h-4 bg-slate-900 border-y border-slate-800 rotate-[-2deg] flex items-center justify-center">
+                  <span class="text-[7px] text-slate-400 uppercase tracking-widest">Kawawa Road</span>
+                </div>
+                <div class="absolute bottom-2 right-4 w-24 h-10 bg-emerald-950/20 border border-emerald-900/30 rounded flex items-center justify-center">
+                  <span class="text-[7px] text-emerald-450 uppercase tracking-wider font-semibold">Biafra Grounds</span>
+                </div>
+                <div class="absolute top-2 left-6 text-slate-500 text-[6px]">Uporoto St</div>
+                <div class="absolute bottom-1 left-4 text-slate-500 text-[6px]">Sapour St</div>
+                <div class="absolute top-[35%] left-[45%] flex flex-col items-center gap-1 z-10 animate-bounce">
+                  <div class="p-1 rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/40">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                  </div>
+                </div>
+                <span class="absolute bottom-1.5 left-1.5 text-[8px] text-slate-500">Kinondoni Biafra Area</span>
+              </div>
+              <div class="text-[11px] leading-relaxed font-sans text-slate-400">
+                <strong class="text-white font-semibold">Plot no. 4, Block no. 36, Kinondoni Biafra</strong><br />
+                Located on Kawawa road, adjacent to Biafra Grounds, Dar Es Salaam.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright & Back to Top row -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+          <div><span>&copy; <span id="copyright-year">2026</span> IMG SAFE. All Rights Reserved.</span></div>
+          <div>
+            <button onclick="scrollToTop()" class="p-2 px-3 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 hover:bg-slate-950 text-slate-300 hover:text-blue-400 transition flex items-center gap-1.5 shadow-md">
+              <span>Back to Top</span><i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Futuristic Floating Back to Top Button -->
+    <button onclick="scrollToTop()" id="global-back-to-top" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-slate-950/90 border border-blue-500/50 hover:border-blue-400 text-blue-400 hover:text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] transition-all duration-300 translate-y-20 opacity-0 pointer-events-none group" title="Back to Top">
+      <i data-lucide="arrow-up" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
+    </button>
+
+
+    <!-- 8. DATABASE DATASET & RUNTIME SCRIPT -->
+    <script>
+      // RAW COMPACT DATABASE DATA
+      const companyDetails = {
+        name: "IMG Safe",
+        fullName: "Incident Management Global",
+        tagline: "Be safe with us",
+        aboutSummary: "At IMG Safe, our best feature is our global team of highly professional and knowledgeable individuals, who, through their hard work, passion, dedication and perceptiveness, continuously drive our company forward. We are extremely proud to be able to advise our clients in the key process of managing all their operations in a safe way.",
+        aboutLong: "We believe that IMG Safe is able to offer the best blend of in-depth sector expertise, a proven ability to quickly comprehend the client's core business and their needs, as well as promptness and agility in conceiving high-end tailor-made solutions. We put our client's interest ahead of our own, and we permanently keep in consideration their comments, expectations and critics, to adapt and improve our company accordingly. We are very much about building solid relationships over the years with world-renowned companies in a wide variety of sectors.",
+        strategy: "Sustainable success requires the flexibility to adapt to a changing environment. Diversity shows the way for flexibility. Research and Development is the process that ensures an enterprise has the right information to make the right choices as its market evolves.",
+        mission: "Our Mission is to be the most successful consulting company in a world, abiding by our principles that consist of the Knowledge, the Effectiveness, the Reliability and the Integrity.",
+        missionPoints: [
+          "Knowledge: Application of most modern technology for the development of pioneering services, optimal quality and capability of flexible adaptation and development of each need of customer.",
+          "Effectiveness: Accompanies each project that we undertake, with the realization of the objectives of our customer.",
+          "Reliability & Integrity: Constitute the main axes of our business culture."
+        ],
+        vision: "The growth and the operation of the company are found in the basic corporate principle: 'quality, effectiveness and adaptability to the needs of market and technological evolutions.'",
+        sustainability: "IMG Safe recognises the importance of economic and social development, and we contribute to its realisation in many ways. In this context we have a responsibility to encourage and support development that can be sustained environmentally, socially and economically for the lasting benefit of those involved.",
+        healthSafety: "We place the highest importance on safety and are committed to ensuring that all work by our staff is carried out in a safe manner and protects everything around us.",
+        contact: {
+          address: "Plot no. 4, Block no. 36, Kinondoni Biafra, Kawawa Road",
+          cityCountry: "Dar Es Salaam, Tanzania",
+          poBox: "P. O. Box 6504",
+          phones: ["+255 786 205 254", "+255 762 695 044", "+255 768 613 613"],
+          whatsapps: ["+255 786 205 254", "+255 713 904 813"],
+          email: "info@imgsafeltd.co.tz"
+        }
+      };
+
+      const coreValues = [
+        { name: "Humility", icon: "compass", desc: "We listen intently before advising, prioritizing client safety and operational objectives above all else, while continually refining our methodologies based on industry feedback and lessons learned." },
+        { name: "Courage", icon: "shield-alert", desc: "We take bold, proactive measures to enforce rigorous safety protocols, manage high-risk critical incidents with total composure, and speak with complete transparency even when delivering hard truths." },
+        { name: "Humour", icon: "smile", desc: "We cultivate a warm, positive, and collaborative workplace culture, recognizing that high morale, team synergy, and psychological safety are essential for peak performance under operational pressure." },
+        { name: "Continue Learning", icon: "graduation-cap", desc: "We embrace a culture of continuous development, systematically upgrading our technical certifications, researching emerging hazards, and integrating advanced safety technologies to remain at the forefront of the industry." },
+        { name: "Diversity", icon: "users", desc: "We champion multi-disciplinary expertise and draw upon diverse international perspectives to spark creative problem-solving, deliver versatile trade sourcing, and offer multi-lingual consulting capabilities." },
+        { name: "Sustainability", icon: "leaf", desc: "We build enduring, eco-conscious, and socially responsible solutions designed to withstand future shifts, ensuring that local communities thrive and businesses remain resilient for generations to come." }
+      ];
+
+      const serviceCategories = [
+        {
+          id: "consulting",
+          title: "Consulting and Advice",
+          icon: "briefcase",
+          color: "from-blue-500/20 to-indigo-500/20 text-blue-400 border-blue-500/30",
+          desc: "Unleash hidden organizational potential and empower a safe, creative, and highly resilient workforce.",
+          details: [
+            "Strategic business safety consulting and gap analysis",
+            "Incident investigation and hazard vulnerability assessments",
+            "Custom compliance audits against national and international standards",
+            "Executive level advisory for operational safety and risk management",
+            "Empowerment strategies for technical and high-risk team performance"
+          ]
+        },
+        {
+          id: "training",
+          title: "Training and Development",
+          icon: "graduation-cap",
+          color: "from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30",
+          desc: "Wide-range skills transfer and practical capacity building in oneself or others, focused on business subjects and safety.",
+          details: [
+            "Health, Safety, and Environment (HSE) certification training",
+            "Incident command systems and crisis management programs",
+            "Technical skills instruction for field operators and protective crews",
+            "Continuous corporate learning plans and competency reviews",
+            "Tailor-made programs designed around company specific hazards"
+          ]
+        },
+        {
+          id: "facilitation",
+          title: "Facilitation and Workshop",
+          icon: "presentation",
+          color: "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30",
+          desc: "Interactive learning to introduce new processes, inspire collaboration, and allow teams to test new methods in a secure space.",
+          details: [
+            "Interactive risk mapping and risk prioritization workshops",
+            "Hands-on equipment simulation and incident responses",
+            "Team alignment and safe failure exploration sessions",
+            "Decision-making strategy workshops for management teams",
+            "Process implementation workshops with customized material"
+          ]
+        },
+        {
+          id: "trading",
+          title: "Trading & Equipment Provision",
+          icon: "shopping-cart",
+          color: "from-rose-500/20 to-pink-500/20 text-rose-400 border-rose-500/30",
+          desc: "Buying and selling a comprehensive range of premium-quality safety tools, protective gears, security systems, and hardware.",
+          details: [
+            "Hiring or sourcing premium global certified equipment",
+            "Dedicated client consultation on product selection",
+            "Full technical support for setup, installation and device onboarding",
+            "Supply chain fulfillment adhering to strict international standards",
+            "Continuous tracking of equipment durability and warranty management"
+          ]
+        },
+        {
+          id: "logistics",
+          title: "Logistics and Transport",
+          icon: "truck",
+          color: "from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/30",
+          desc: "Reliable and high-safety transport of local goods, bulk fuel, specialized heavy machinery, and construction transport.",
+          details: [
+            "Bulk fuel logistics and high-risk cargo transportation",
+            "Heavy duty excavator work and site preparation logistics",
+            "Onsite delivery of materials, safety kits, and equipment on demand",
+            "Highly trained personnel specializing in secure hazardous transport",
+            "Integrated fleet tracking, custom routing, and incident contingency"
+          ]
+        }
+      ];
+
+      const productCategories = [
+        {
+          id: "safety-gears",
+          name: "Safety Tools & Protective Gears",
+          icon: "hard-hat",
+          items: [
+            "Eye and Face Protection (High-impact goggles, face shields)",
+            "Hand Protection (Chemical resistant, high-heat, heavy-duty gloves)",
+            "Head Protection (Industrial hard hats, climbing helmets)",
+            "Hearing Protection (Noise-canceling earmuffs, soft earplugs)",
+            "Foot Protection (Steel-toe boots, slip-resistant footwear)",
+            "Body Protection (Flame-retardant coveralls, high-visibility vests)",
+            "Respiratory Protection (N95 respirators, gas masks, filters)",
+            "Fall Protection (Full body harnesses, shock-absorbing lanyards)",
+            "Fire Fighting Equipments (Extinguishers, fire blankets, hoses)",
+            "First Aid Kit (Fully stocked trauma bags, response cabinets)"
+          ]
+        },
+        {
+          id: "security-systems",
+          name: "Security & Surveillance Systems",
+          icon: "shield",
+          items: [
+            "High-Definition CCTV & IP Cameras (Night vision, wide angle)",
+            "Intruder Alarm Systems (Motion sensors, window/door contacts)",
+            "Fire Alarm Systems (Smoke/heat detectors, sirens, pull stations)",
+            "Access Control (Biometrics, card readers, turnstiles, software)",
+            "Electric Fences (Energizers, alarms, warning signposts)"
+          ]
+        },
+        {
+          id: "ict-hardware",
+          name: "ICT Equipments & Software",
+          icon: "cpu",
+          items: [
+            "Enterprise Computers, Laptops & secure accessories",
+            "Heavy-duty Office Printers & multi-function devices",
+            "Ink Jets & premium toner supplies",
+            "High-speed Scanners & document managers",
+            "Corporate & Custom Software Programs for management"
+          ]
+        },
+        {
+          id: "building-plumbing",
+          name: "Hardware & Plumbing Equipments",
+          icon: "wrench",
+          items: [
+            "Building Material Hardware (Saws, drills, hand/power tools)",
+            "Plumbing Materials (High-grade pipes, valves, fittings)",
+            "General Plumbing Equipments & installation assemblies"
+          ]
+        },
+        {
+          id: "fuel-special",
+          name: "Fuel, Electrical & Solar Systems",
+          icon: "sun",
+          items: [
+            "Electronic Line Lead Detectors & leak management",
+            "Solenoid Valves for flow meters & pipeline control",
+            "Heavy-duty Pump Nozzles & high-flow petroleum gear",
+            "Deep-cycle Industrial Batteries & backup power systems",
+            "Premium Solar Panels & grid controllers"
+          ]
+        },
+        {
+          id: "uniforms-apparel",
+          name: "Professional Uniforms",
+          icon: "shirt",
+          items: [
+            "Education Institutions (Clean, school-matching attire)",
+            "Aviation & Aircrew (Elegant high-standard uniforms)",
+            "Security Guards (Tactical, standard duty uniforms)",
+            "Corporate Uniforms (Sleek professional business wear)",
+            "Safety Products (High visibility, durable industrial options)",
+            "Sports, Healthcare (Scrubs), & Hospitality Uniforms"
+          ]
+        },
+        {
+          id: "decor-printing",
+          name: "Office Decor, Design & Printing",
+          icon: "printer",
+          items: [
+            "Home & Office Decor (Chairs, smart desks, organizers)",
+            "High-impact Graphic Design and Large Format Printing",
+            "Marketing Banners, brochures, business cards, display stands"
+          ]
+        },
+        {
+          id: "heavy-machinery",
+          name: "Machine, Industrial & Garage Tools",
+          icon: "cog",
+          items: [
+            "Professional Hand & Power Tools",
+            "Garage & Heavy Machinery equipment",
+            "Car Wash Tools, pressure washers, and air systems",
+            "Industrial generators & water pumps"
+          ]
+        }
+      ];
+
+      const keySectors = [
+        { name: "Power, Energy & Utilities", icon: "zap", desc: "Securing power plants, substations, and local utility distribution grids." },
+        { name: "Financial Institutions", icon: "building-2", desc: "Risk advisory and critical infrastructure security for banks." },
+        { name: "Mining and Resources", icon: "gem", desc: "Providing robust safety gear, training, and heavy-cargo logistics." },
+        { name: "Industrial Manufacturing", icon: "factory", desc: "Facilitating worker safety, supply chains, and response plans." },
+        { name: "Infrastructure & Construction", icon: "hammer", desc: "On-site protective safety tools, building hardware, and secure deliveries." },
+        { name: "Telecommunications", icon: "wifi", desc: "Securing signal towers, network gear, and technical software installation." },
+        { name: "Engineering & Technical", icon: "cpu", desc: "Agile consulting, state-of-the-art tools, and troubleshooting." },
+        { name: "Transportation & Logistics", icon: "truck", desc: "Managing hazardous cargo, bulk fuel transport, and fleet compliance." }
+      ];
+
+      const clientList = [
+        { name: "Tristar", logo: "TRISTAR", color: "bg-red-950/40 text-red-400 border-red-500/20" },
+        { name: "Primefuels", logo: "PRIMEFUELS", color: "bg-blue-950/40 text-blue-400 border-blue-500/20" },
+        { name: "Bakhresa Group", logo: "BAKHRESA GROUP", color: "bg-orange-950/40 text-orange-400 border-orange-500/20" },
+        { name: "TPC Limited", logo: "TPC LIMITED", color: "bg-emerald-950/40 text-emerald-400 border-emerald-500/20" },
+        { name: "Tanzania Polisi", logo: "POLISI TZ", color: "bg-indigo-950/40 text-indigo-400 border-indigo-500/20" },
+        { name: "Bank of Tanzania", logo: "BANK OF TZ", color: "bg-yellow-950/40 text-yellow-500 border-yellow-500/20" },
+        { name: "Tanesco", logo: "TANESCO", color: "bg-green-950/40 text-green-400 border-green-500/20" },
+        { name: "AngloGold Ashanti", logo: "ANGLOGOLD", color: "bg-amber-950/40 text-amber-400 border-amber-500/20" },
+        { name: "Simba Logistics", logo: "SIMBA LOGISTICS", color: "bg-red-950/40 text-red-400 border-red-500/20" },
+        { name: "Puma Energy", logo: "PUMA ENERGY", color: "bg-emerald-950/40 text-emerald-300 border-emerald-500/20" },
+        { name: "Jambo", logo: "JAMBO GROUP", color: "bg-rose-950/40 text-rose-400 border-rose-500/20" },
+        { name: "Siginon Group", logo: "SIGINON GROUP", color: "bg-sky-950/40 text-sky-400 border-sky-500/20" }
+      ];
+
+
+      // SHIELD VECTOR LOGO TEMPLATE (SHARED GRADIENT STYLES)
+      function getShieldLogoSVG(size, isFooter = false) {
+        return `
+          <svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline-block select-none">
+            <!-- 3D Blue Diamond (Top) -->
+            <!-- Left side: Royal Blue -->
+            <path d="M50 15 L25 40 L50 65 Z" fill="#1E51C7" />
+            <!-- Right side: Darker Navy Blue -->
+            <path d="M50 15 L50 65 L75 40 Z" fill="#13388E" />
+
+            <!-- 3D Grey Chevron (Bottom) -->
+            <!-- Left side: Light Cool Grey -->
+            <path d="M50 70 L25 45 L25 63 L50 88 Z" fill="#949AA5" />
+            <!-- Right side: Darker Cool Grey -->
+            <path d="M50 70 L50 88 L75 63 L75 45 Z" fill="#7A808C" />
+          </svg>
+        `;
+      }
+
+
+      // APP STATE GLOBALS
+      let activeSection = 'hero';
+      let isMobileMenuOpen = false;
+      let selectedProductCat = 'safety-gears';
+      let inquiries = [];
+
+
+      // DOM READY BOOTSTRAPPER
+      window.addEventListener('DOMContentLoaded', () => {
+        // Set copyright year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        // Inject SVG Logos
+        document.getElementById('header-logo-container').innerHTML = getShieldLogoSVG(42);
+        document.getElementById('hero-mini-logo-container').innerHTML = getShieldLogoSVG(46);
+        document.getElementById('hero-giant-logo-container').innerHTML = getShieldLogoSVG(310);
+        document.getElementById('footer-logo-container').innerHTML = getShieldLogoSVG(40);
+
+        // Populate Company about texts
+        document.getElementById('about-summary-text').textContent = companyDetails.aboutSummary;
+        document.getElementById('about-long-text').textContent = companyDetails.aboutLong;
+        document.getElementById('mission-text-quote').textContent = `"${companyDetails.mission}"`;
+        document.getElementById('vision-text-quote').textContent = `"${companyDetails.vision}"`;
+        document.getElementById('strategy-text-para').textContent = companyDetails.strategy;
+        document.getElementById('sustainability-summary').textContent = companyDetails.sustainability;
+        document.getElementById('safety-summary-text').textContent = companyDetails.healthSafety;
+
+        // Render Mission Points list
+        const missionUl = document.getElementById('mission-bullet-points');
+        companyDetails.missionPoints.forEach(point => {
+          const colonIndex = point.indexOf(':');
+          const title = colonIndex !== -1 ? point.substring(0, colonIndex) : '';
+          const desc = colonIndex !== -1 ? point.substring(colonIndex + 1) : point;
+          const li = document.createElement('li');
+          li.className = 'flex items-start gap-2.5 text-xs text-slate-400';
+          li.innerHTML = `
+            <i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 shrink-0 mt-0.5"></i>
+            <span><strong class="text-slate-200 font-semibold">${title}:</strong>${desc}</span>
+          `;
+          missionUl.appendChild(li);
+        });
+
+        // Render Core Values
+        const valuesGrid = document.getElementById('values-grid-container');
+        coreValues.forEach(val => {
+          const card = document.createElement('div');
+          card.id = `value-card-${val.name.toLowerCase().replace(/\s+/g, '-')}`;
+          card.className = "group relative p-6 rounded-2xl bg-[#0e1626]/80 border border-slate-850 hover:border-blue-500/30 hover:bg-[#111a2d] transition-all duration-300 shadow-xl";
+          card.innerHTML = `
+            <div class="absolute top-0 right-0 p-3 opacity-[0.02] group-hover:opacity-[0.06] text-blue-500 transition-opacity">
+              <i data-lucide="${val.icon}" class="w-24 h-24"></i>
+            </div>
+            <div class="flex flex-col gap-4">
+              <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-blue-400 w-fit group-hover:text-blue-300 group-hover:border-slate-700 transition-colors">
+                <i data-lucide="${val.icon}" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-display font-semibold text-lg text-white group-hover:text-blue-400 transition-colors">${val.name}</h4>
+              <p class="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">${val.desc}</p>
+            </div>
+          `;
+          valuesGrid.appendChild(card);
+        });
+
+        // Render Core Services
+        const servicesGrid = document.getElementById('core-services-list');
+        serviceCategories.forEach(srv => {
+          const card = document.createElement('div');
+          card.id = `service-card-${srv.id}`;
+          card.className = "p-6 rounded-2xl bg-[#0e1626]/80 border border-slate-850 hover:border-blue-500/30 hover:bg-[#111a2d] transition-all duration-300 shadow-xl flex flex-col justify-between h-full group";
+          
+          let detailsHtml = srv.details.map(det => `
+            <li class="flex items-start gap-2 text-xs text-slate-400">
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+              <span>${det}</span>
+            </li>
+          `).join('');
+
+          card.innerHTML = `
+            <div class="space-y-4">
+              <div class="p-3 rounded-xl border w-fit bg-gradient-to-br ${srv.color}">
+                <i data-lucide="${srv.icon}" class="w-5 h-5 text-white"></i>
+              </div>
+              <h3 class="font-display font-semibold text-xl text-white group-hover:text-blue-400 transition-colors">${srv.title}</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans">${srv.desc}</p>
+              <div class="h-px bg-slate-850 my-4"></div>
+              <ul class="space-y-2">${detailsHtml}</ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-850 flex items-center justify-between text-xs text-slate-500 group-hover:text-blue-400 transition-colors font-mono">
+              <span>IMG SAFE SYSTEM</span>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+            </div>
+          `;
+          servicesGrid.appendChild(card);
+        });
+
+        // Render Product Categories Sidebar
+        const sidebar = document.getElementById('product-cat-sidebar');
+        productCategories.forEach(cat => {
+          const btn = document.createElement('button');
+          btn.id = `product-cat-btn-${cat.id}`;
+          btn.onclick = () => selectProductCategory(cat.id);
+          const isSel = selectedProductCat === cat.id;
+          btn.className = `w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-xs sm:text-sm font-medium transition-all duration-300 border ${
+            isSel ? 'bg-blue-950/60 text-blue-400 border-blue-900/40 font-semibold shadow-sm' : 'text-slate-400 hover:text-white hover:bg-slate-900 border-transparent'
+          }`;
+          
+          btn.innerHTML = `
+            <div class="p-1.5 rounded-lg border ${isSel ? 'bg-blue-900/50 border-blue-800/40 text-blue-400' : 'bg-slate-950 border-slate-800 text-slate-400'}">
+              <i data-lucide="${cat.icon}" class="w-4 h-4"></i>
+            </div>
+            <span class="truncate">${cat.name}</span>
+          `;
+          sidebar.appendChild(btn);
+        });
+
+        // Initialize active category view
+        renderProductCategoryDetails();
+
+        // Render Key Sectors
+        const sectorsGrid = document.getElementById('key-sectors-grid');
+        keySectors.forEach((sec, idx) => {
+          const div = document.createElement('div');
+          div.className = "p-5 rounded-xl bg-slate-900/40 border border-slate-850 hover:border-blue-900/60 hover:bg-slate-900/80 transition-all duration-300 flex flex-col gap-3 group shadow-md";
+          div.innerHTML = `
+            <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-blue-400 group-hover:text-blue-300 group-hover:border-slate-700 transition-all w-fit">
+              <i data-lucide="${sec.icon}" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h4 class="font-display font-medium text-sm text-slate-200 group-hover:text-white transition-colors">${sec.name}</h4>
+              <p class="text-[11px] text-slate-400 leading-normal mt-1 font-sans">${sec.desc}</p>
+            </div>
+          `;
+          sectorsGrid.appendChild(div);
+        });
+
+        // Render Client Badges
+        const clientsGrid = document.getElementById('client-badges-grid');
+        clientList.forEach((cl, idx) => {
+          const div = document.createElement('div');
+          div.className = `p-6 rounded-xl border text-center transition-all duration-300 flex flex-col items-center justify-center min-h-[100px] hover:scale-[1.03] shadow-lg ${cl.color}`;
+          div.innerHTML = `
+            <span class="font-display font-bold text-xs tracking-wider block">${cl.logo}</span>
+            <span class="text-[9px] font-mono text-slate-400 uppercase tracking-widest mt-2 block">${cl.name}</span>
+          `;
+          clientsGrid.appendChild(div);
+        });
+
+        // Populate Contact fields
+        document.getElementById('contact-address-text').textContent = companyDetails.contact.address;
+        document.getElementById('contact-city-po').textContent = `${companyDetails.contact.cityCountry} • ${companyDetails.contact.poBox}`;
+        
+        // Render Contact Phones
+        const phonesDiv = document.getElementById('contact-phones-list');
+        companyDetails.contact.phones.forEach(ph => {
+          const cleanPh = ph.replace(/\s+/g, '');
+          phonesDiv.innerHTML += `
+            <a href="tel:${cleanPh}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-blue-400 hover:border-blue-800 hover:bg-slate-950 transition shadow-md">
+              <i data-lucide="phone-call" class="w-3.5 h-3.5 text-blue-400 animate-pulse"></i>
+              <span>${ph}</span>
+            </a>
+          `;
+        });
+
+        // Render Contact WhatsApps
+        const whatsappsDiv = document.getElementById('contact-whatsapps-list');
+        companyDetails.contact.whatsapps.forEach(wa => {
+          const cleanWa = wa.replace(/[+\s]+/g, '');
+          whatsappsDiv.innerHTML += `
+            <a href="https://wa.me/${cleanWa}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#073322]/80 border border-[#0d593c]/50 text-xs text-[#5bf4b3] hover:text-white hover:bg-[#0c4a32] transition shadow-md">
+              <i data-lucide="message-square" class="w-3.5 h-3.5 animate-pulse"></i>
+              <span>WhatsApp Live</span>
+            </a>
+          `;
+        });
+
+        // Sourcing desk link
+        const emailLink = document.getElementById('contact-email-link');
+        emailLink.href = `mailto:${companyDetails.contact.email}?subject=IMG%20Safe%20Sourcing%20Desk`;
+        emailLink.textContent = companyDetails.contact.email;
+
+        // Service focus dropdown
+        const selectSrv = document.getElementById('form-serviceType');
+        serviceCategories.forEach(srv => {
+          selectSrv.innerHTML += `<option value="${srv.title}">${srv.title}</option>`;
+        });
+
+        // Load inquiries and render Admin list
+        bootstrapInquiries();
+
+        // Scroll listener for sticky header and back to top
+        window.addEventListener('scroll', handleGlobalScroll, { passive: true });
+
+        // Compile all initial Lucide Icons on the page!
+        lucide.createIcons();
+      });
+
+
+      // GLOBAL SCROLL MONITOR
+      function handleGlobalScroll() {
+        const header = document.getElementById('app-header');
+        const btt = document.getElementById('global-back-to-top');
+        const isScrolled = window.scrollY > 50;
+        
+        // Sticky Header styling
+        if (isScrolled) {
+          header.className = "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#080e1a]/95 backdrop-blur-md border-b border-slate-800/80 py-3 shadow-lg shadow-black/20";
+        } else {
+          header.className = "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5";
+        }
+
+        // Scroll progress bar width
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+        document.getElementById('header-scroll-progress').style.width = `${progress}%`;
+
+        // Active navigation tab sync
+        const sections = ['hero', 'about', 'services', 'contact'];
+        let activeSecId = 'hero';
+        for (const sId of sections) {
+          const el = document.getElementById(sId);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            // If section occupies a good chunk of upper viewport, make it active
+            if (rect.top <= 120 && rect.bottom >= 120) {
+              activeSecId = sId;
+              break;
+            }
+          }
+        }
+        updateActiveNavState(activeSecId);
+
+        // Show Back to Top
+        if (window.scrollY > 600) {
+          btt.className = "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-slate-950/90 border border-blue-500/50 hover:border-blue-400 text-blue-400 hover:text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] transition-all duration-300 translate-y-0 opacity-100 pointer-events-auto group cursor-pointer";
+        } else {
+          btt.className = "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-slate-950/90 border border-blue-500/50 hover:border-blue-400 text-blue-400 hover:text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] transition-all duration-300 translate-y-20 opacity-0 pointer-events-none group";
+        }
+      }
+
+
+      // SYNC TAB BUTTONS ACTIVE CLASSES
+      function updateActiveNavState(sId) {
+        activeSection = sId;
+        const navTabs = document.querySelectorAll('.nav-tab');
+        navTabs.forEach(btn => {
+          if (btn.id === `nav-tab-${sId}`) {
+            btn.className = "nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-white bg-blue-600 shadow-md shadow-blue-600/30";
+          } else {
+            btn.className = "nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white";
+          }
+        });
+
+        // Mobile drawer matching state
+        const mobileBtns = document.querySelectorAll('.mobile-nav-btn');
+        mobileBtns.forEach((btn, idx) => {
+          const ids = ['hero', 'about', 'services', 'contact'];
+          if (ids[idx] === sId) {
+            btn.className = "mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between bg-blue-950/40 text-blue-400 border border-blue-900/40";
+          } else {
+            btn.className = "mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between text-slate-400 hover:bg-slate-900 hover:text-white border border-transparent";
+          }
+        });
+      }
+
+
+      // SCROLL TO SECTION COORD
+      function scrollToSection(id) {
+        // Close menu
+        isMobileMenuOpen = false;
+        document.getElementById('mobile-nav-panel').classList.add('hidden');
+        document.getElementById('menu-icon').setAttribute('data-lucide', 'menu');
+        
+        const el = document.getElementById(id);
+        if (el) {
+          const offset = id === 'hero' ? 0 : 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = el.getBoundingClientRect().top;
+          const offsetPosition = (elementRect - bodyRect) - offset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+        updateActiveNavState(id);
+        lucide.createIcons();
+      }
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+
+      // MOBILE NAV PANEL TRIGGER
+      function toggleMobileMenu() {
+        isMobileMenuOpen = !isMobileMenuOpen;
+        const panel = document.getElementById('mobile-nav-panel');
+        const icon = document.getElementById('menu-icon');
+        if (isMobileMenuOpen) {
+          panel.classList.remove('hidden');
+          icon.setAttribute('data-lucide', 'x');
+        } else {
+          panel.classList.add('hidden');
+          icon.setAttribute('data-lucide', 'menu');
+        }
+        lucide.createIcons();
+      }
+
+
+      // ABOUT SWITCHER TABS ENGINE
+      function setActiveAboutTab(tabId) {
+        const tabBtns = document.querySelectorAll('.about-tab-btn');
+        tabBtns.forEach(btn => {
+          if (btn.id === `btn-tab-${tabId}`) {
+            btn.className = "about-tab-btn px-4 py-2 text-xs sm:text-sm font-mono uppercase tracking-wider rounded-lg font-medium transition duration-300 bg-blue-950/60 text-blue-400 border border-blue-900/40";
+          } else {
+            btn.className = "about-tab-btn px-4 py-2 text-xs sm:text-sm font-mono uppercase tracking-wider rounded-lg font-medium transition duration-300 text-slate-400 hover:text-white hover:bg-slate-900";
+          }
+        });
+
+        const panels = document.querySelectorAll('.about-panel');
+        panels.forEach(p => {
+          if (p.id === `panel-${tabId}`) {
+            p.classList.remove('hidden');
+          } else {
+            p.classList.add('hidden');
+          }
+        });
+      }
+
+
+      // CENTRAL SERVICES VIEW SELECTOR
+      function setActiveServiceView(viewId) {
+        const tabs = document.querySelectorAll('.service-view-tab');
+        tabs.forEach(tab => {
+          if (tab.id === `services-tab-${viewId}`) {
+            tab.className = "service-view-tab flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition duration-300 text-white bg-blue-600 shadow-lg shadow-blue-600/20";
+          } else {
+            tab.className = "service-view-tab flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white";
+          }
+        });
+
+        const panels = document.querySelectorAll('.service-panel-view');
+        panels.forEach(panel => {
+          if (panel.id === `service-view-panel-${viewId}`) {
+            panel.classList.remove('hidden');
+          } else {
+            panel.classList.add('hidden');
+          }
+        });
+      }
+
+
+      // PRODUCTS SOURCING INTERNAL PANEL SELECTION
+      function selectProductCategory(catId) {
+        selectedProductCat = catId;
+        const catBtns = document.querySelectorAll('[id^="product-cat-btn-"]');
+        catBtns.forEach(btn => {
+          const isSel = btn.id === `product-cat-btn-${catId}`;
+          const iconDiv = btn.querySelector('div');
+          if (isSel) {
+            btn.className = "w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-xs sm:text-sm font-medium transition-all duration-300 border bg-blue-950/60 text-blue-400 border-blue-900/40 font-semibold shadow-sm";
+            iconDiv.className = "p-1.5 rounded-lg border bg-blue-900/50 border-blue-800/40 text-blue-400";
+          } else {
+            btn.className = "w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-xs sm:text-sm font-medium transition-all duration-300 border text-slate-400 hover:text-white hover:bg-slate-900 border-transparent";
+            iconDiv.className = "p-1.5 rounded-lg border bg-slate-950 border-slate-800 text-slate-400";
+          }
+        });
+
+        renderProductCategoryDetails();
+        lucide.createIcons();
+      }
+
+      function renderProductCategoryDetails() {
+        const detPanel = document.getElementById('product-category-details-panel');
+        const catObj = productCategories.find(c => c.id === selectedProductCat);
+        if (!catObj) return;
+
+        let itemsHtml = catObj.items.map((it, idx) => `
+          <div id="product-item-${catObj.id}-${idx}" class="p-4 rounded-xl bg-slate-950/60 border border-slate-850 hover:border-slate-700 hover:bg-slate-900/60 transition-all flex items-start gap-3">
+            <div class="p-1 rounded-full bg-blue-955 text-blue-400 mt-0.5">
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+            </div>
+            <span class="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans font-medium">${it}</span>
+          </div>
+        `).join('');
+
+        detPanel.innerHTML = `
+          <div class="flex items-center gap-4 pb-4 border-b border-slate-800">
+            <div class="p-3 rounded-xl bg-blue-950 text-blue-400 border border-blue-900/40">
+              <i data-lucide="${catObj.icon}" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="font-display font-semibold text-xl text-white">${catObj.name}</h3>
+              <span class="text-[10px] font-mono tracking-widest text-slate-500 uppercase">AVAILABLE FOR TRADE & LOGISTICAL SUPPLY</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">${itemsHtml}</div>
+          <div class="p-4 rounded-xl bg-slate-950/40 border border-dashed border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+            <div class="text-slate-400 font-sans">Need specific bulk products or customized sizing for your enterprise team?</div>
+            <button onclick="scrollToSection('contact')" class="text-blue-400 font-mono font-medium hover:text-blue-300 transition flex items-center gap-1.5 shrink-0">
+              <span>Request Quote</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+      }
+
+
+      // INQUIRY FORM VALIDATION AND INTAKE ENGINE
+      function handleInquirySubmit(event) {
+        event.preventDefault();
+
+        // Clear previous error styles and warnings
+        const fields = ['name', 'email', 'phone', 'subject', 'message'];
+        fields.forEach(f => {
+          document.getElementById(`err-${f}`).textContent = '';
+        });
+
+        // Fetch inputs
+        const nameVal = document.getElementById('form-name').value.trim();
+        const emailVal = document.getElementById('form-email').value.trim();
+        const phoneVal = document.getElementById('form-phone').value.trim();
+        const serviceTypeVal = document.getElementById('form-serviceType').value;
+        const subjectVal = document.getElementById('form-subject').value.trim();
+        const messageVal = document.getElementById('form-message').value.trim();
+
+        // Check validation
+        let isValid = true;
+        if (!nameVal) {
+          document.getElementById('err-name').textContent = 'Full name is required.';
+          isValid = false;
+        }
+        if (!emailVal) {
+          document.getElementById('err-email').textContent = 'Email address is required.';
+          isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(emailVal)) {
+          document.getElementById('err-email').textContent = 'Please enter a valid email address.';
+          isValid = false;
+        }
+        if (!phoneVal) {
+          document.getElementById('err-phone').textContent = 'Phone number is required.';
+          isValid = false;
+        }
+        if (!subjectVal) {
+          document.getElementById('err-subject').textContent = 'Inquiry subject is required.';
+          isValid = false;
+        }
+        if (!messageVal) {
+          document.getElementById('err-message').textContent = 'Please type a message.';
+          isValid = false;
+        }
+
+        if (!isValid) return;
+
+        // Visual loading spinner simulation
+        const submitBtn = document.getElementById('form-submit-btn');
+        const submitText = document.getElementById('btn-submit-text');
+        submitBtn.disabled = true;
+        submitText.textContent = "Logging inquiry securely...";
+
+        setTimeout(() => {
+          // Construct inquiry object
+          const newInq = {
+            id: `inq-${Date.now()}`,
+            name: nameVal,
+            email: emailVal,
+            phone: phoneVal,
+            subject: subjectVal,
+            serviceType: serviceTypeVal,
+            message: messageVal,
+            date: new Date().toLocaleString(),
+            status: 'new'
+          };
+
+          // Save to LocalStorage
+          inquiries.unshift(newInq);
+          localStorage.setItem('img_safe_inquiries', JSON.stringify(inquiries));
+
+          // Reset fields
+          document.getElementById('form-name').value = '';
+          document.getElementById('form-email').value = '';
+          document.getElementById('form-phone').value = '';
+          document.getElementById('form-subject').value = '';
+          document.getElementById('form-message').value = '';
+
+          // Show success banner
+          const banner = document.getElementById('form-success-banner');
+          banner.classList.remove('hidden');
+          banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+          // Refresh button status
+          submitBtn.disabled = false;
+          submitText.textContent = "Log Sourcing Inquiry";
+
+          // Reload dashboard inbox list
+          renderAdminInquiries();
+
+          // Clear success banner in 5s
+          setTimeout(() => {
+            banner.classList.add('hidden');
+          }, 6000);
+
+        }, 800);
+      }
+
+
+      // REAL-TIME LOCAL INBOX DATABASE CONTROLS
+      function bootstrapInquiries() {
+        const saved = localStorage.getItem('img_safe_inquiries');
+        if (saved) {
+          try {
+            inquiries = JSON.parse(saved);
+          } catch (e) {
+            console.error("Inquiries parsing failed, seeding default", e);
+          }
+        }
+        
+        // Seed default if empty
+        if (!inquiries || inquiries.length === 0) {
+          inquiries = [
+            {
+              id: 'inq-seed-1',
+              name: 'Juma Bakhresa',
+              email: 'j.bakhresa@bakhresagroup.com',
+              phone: '+255 786 200 000',
+              subject: 'Bulk Sourcing for New Protective Gears',
+              serviceType: 'Trading & Equipment Provision',
+              message: 'Hello IMG Safe, we would like to request a quote for 500 sets of fire-retardant coveralls and 200 respiratory protection kits for our manufacturing warehouse team in Dar Es Salaam. Please send the catalog.',
+              date: new Date(Date.now() - 3600000 * 2).toLocaleString(),
+              status: 'new'
+            }
+          ];
+          localStorage.setItem('img_safe_inquiries', JSON.stringify(inquiries));
+        }
+
+        renderAdminInquiries();
+      }
+
+      function renderAdminInquiries() {
+        const container = document.getElementById('admin-inquiries-list');
+        const statsBadge = document.getElementById('admin-inbox-stats-badge');
+        
+        // Stats counts
+        const newCount = inquiries.filter(i => i.status === 'new').length;
+        statsBadge.textContent = `${newCount} new`;
+
+        if (inquiries.length === 0) {
+          container.innerHTML = `
+            <div class="p-8 text-center text-xs text-slate-500 font-mono flex flex-col items-center gap-2">
+              <i data-lucide="help-circle" class="w-8 h-8 text-slate-600"></i>
+              <span>No inquiries logged in the local database.</span>
+            </div>
+          `;
+          lucide.createIcons();
+          return;
+        }
+
+        let html = inquiries.map(inq => {
+          let statusBadgeClass = "bg-blue-950/60 text-blue-400 border border-blue-900/40";
+          if (inq.status === 'replied') statusBadgeClass = "bg-emerald-950/60 text-emerald-400 border border-emerald-900/40";
+          if (inq.status === 'archived') statusBadgeClass = "bg-slate-900 text-slate-500 border border-slate-800";
+
+          return `
+            <div id="inquiry-row-${inq.id}" class="p-6 space-y-4 hover:bg-slate-900/30 transition duration-200">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-900 pb-3">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2.5">
+                    <span class="font-display font-semibold text-white text-sm sm:text-base">${inq.name}</span>
+                    <span class="text-[10px] font-mono ${statusBadgeClass} px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">${inq.status}</span>
+                  </div>
+                  <div class="text-xs text-slate-400 font-sans flex flex-wrap gap-x-3 gap-y-1 items-center">
+                    <a href="mailto:${inq.email}" class="hover:text-blue-400 transition underline underline-offset-2 flex items-center gap-1">
+                      <i data-lucide="mail" class="w-3.5 h-3.5"></i><span>${inq.email}</span>
+                    </a>
+                    <span>•</span>
+                    <a href="tel:${inq.phone.replace(/\s+/g, '')}" class="hover:text-blue-400 transition underline underline-offset-2 flex items-center gap-1">
+                      <i data-lucide="phone" class="w-3.5 h-3.5"></i><span>${inq.phone}</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="font-mono text-[10px] text-slate-500 text-right shrink-0">
+                  <div class="flex items-center justify-end gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i><span>${inq.date}</span></div>
+                  <div class="mt-1 uppercase text-blue-500 tracking-wider font-semibold">${inq.serviceType}</div>
+                </div>
+              </div>
+
+              <div class="space-y-1.5">
+                <div class="text-xs font-mono font-bold text-slate-200 uppercase tracking-wide">Subject: ${inq.subject}</div>
+                <p class="text-xs sm:text-sm text-slate-350 font-sans leading-relaxed bg-slate-950/40 p-3 rounded-lg border border-slate-900/65 whitespace-pre-wrap">${inq.message}</p>
+              </div>
+
+              <!-- Admin controls row -->
+              <div class="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
+                <div class="flex gap-2">
+                  ${inq.status !== 'replied' ? `
+                    <button onclick="updateInquiryStatus('${inq.id}', 'replied')" class="px-3 py-1.5 rounded-lg bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-400 border border-emerald-900/35 transition flex items-center gap-1.5 font-mono">
+                      <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i><span>Mark Replied</span>
+                    </button>
+                  ` : ''}
+                  ${inq.status !== 'archived' ? `
+                    <button onclick="updateInquiryStatus('${inq.id}', 'archived')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-850 text-slate-300 border border-slate-800 transition flex items-center gap-1.5 font-mono">
+                      <i data-lucide="archive" class="w-3.5 h-3.5"></i><span>Archive</span>
+                    </button>
+                  ` : ''}
+                </div>
+                <button onclick="deleteInquiry('${inq.id}')" class="px-3 py-1.5 rounded-lg bg-rose-950/30 hover:bg-rose-900/40 text-rose-400 border border-rose-900/20 transition flex items-center gap-1.5 font-mono" title="Delete Inquiry">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i><span>Delete</span>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        container.innerHTML = html;
+        lucide.createIcons();
+      }
+
+      function updateInquiryStatus(id, newStatus) {
+        inquiries = inquiries.map(inq => inq.id === id ? { ...inq, status: newStatus } : inq);
+        localStorage.setItem('img_safe_inquiries', JSON.stringify(inquiries));
+        renderAdminInquiries();
+      }
+
+      function deleteInquiry(id) {
+        inquiries = inquiries.filter(inq => inq.id !== id);
+        localStorage.setItem('img_safe_inquiries', JSON.stringify(inquiries));
+        renderAdminInquiries();
+      }
+
+      function clearAllInquiries() {
+        if (confirm("Are you sure you want to clear all logged inquiries from the local dashboard? This cannot be undone.")) {
+          inquiries = [];
+          localStorage.removeItem('img_safe_inquiries');
+          renderAdminInquiries();
+        }
+      }
+
+      // TOGGLE ACCORDION ADMIN BOX PANEL
+      let isAdminInboxOpen = false;
+      function toggleAdminInbox() {
+        isAdminInboxOpen = !isAdminInboxOpen;
+        const panel = document.getElementById('admin-inbox-panel');
+        const chev = document.getElementById('admin-inbox-chevron');
+        if (isAdminInboxOpen) {
+          panel.classList.remove('hidden');
+          chev.className = "w-4 h-4 transition-transform duration-300 rotate-180";
+        } else {
+          panel.classList.add('hidden');
+          chev.className = "w-4 h-4 transition-transform duration-300 rotate-0";
+        }
+      }
+    </script>
   </body>
 </html>
-

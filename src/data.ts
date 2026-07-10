@@ -20,41 +20,41 @@ export const companyDetails = {
     address: "Plot no. 4, Block no. 36, Kinondoni Biafra, Kawawa Road",
     cityCountry: "Dar Es Salaam, Tanzania",
     poBox: "P. O. Box 6504",
-    phones: ["+255 786 205 254", "+255 762 695 044", "+255 766 950 077"],
+    phones: ["+255 786 205 254", "+255 762 695 044", "+255 768 613 613"],
     whatsapps: ["+255 786 205 254", "+255 713 904 813"],
-    email: "imgsafeltd@gmail.com"
+    email: "info@imgsafeltd.co.tz"
   }
 };
 
 export const coreValues: ValueItem[] = [
   {
     name: "Humility",
-    description: "Listening before advising, placing clients' and safety needs above our own, and constantly adapting based on feedback.",
+    description: "We listen intently before advising, prioritizing client safety and operational objectives above all else, while continually refining our methodologies based on industry feedback and lessons learned.",
     iconName: "Compass"
   },
   {
     name: "Courage",
-    description: "Taking bold steps to ensure safety standards, managing hazardous incidents with composure, and advising honestly even on hard truths.",
+    description: "We take bold, proactive measures to enforce rigorous safety protocols, manage high-risk critical incidents with total composure, and speak with complete transparency even when delivering hard truths.",
     iconName: "ShieldAlert"
   },
   {
     name: "Humour",
-    description: "Maintaining a positive, friendly, and resilient work environment that fosters high morale and cohesive team communication.",
+    description: "We cultivate a warm, positive, and collaborative workplace culture, recognizing that high morale, team synergy, and psychological safety are essential for peak performance under operational pressure.",
     iconName: "Smile"
   },
   {
     name: "Continue Learning",
-    description: "Adapting to technological evolutions and market developments to constantly expand our specialized know-how and capabilities.",
+    description: "We embrace a culture of continuous development, systematically upgrading our technical certifications, researching emerging hazards, and integrating advanced safety technologies to remain at the forefront of the industry.",
     iconName: "GraduationCap"
   },
   {
     name: "Diversity",
-    description: "Fostering flexibility and wide-ranging skills, drawing from diverse international backgrounds to enrich problem-solving.",
+    description: "We champion multi-disciplinary expertise and draw upon diverse international perspectives to spark creative problem-solving, deliver versatile trade sourcing, and offer multi-lingual consulting capabilities.",
     iconName: "Users"
   },
   {
     name: "Sustainability",
-    description: "Promoting social, environmental, and economic growth that is built to endure, ensuring a safe tomorrow.",
+    description: "We build enduring, eco-conscious, and socially responsible solutions designed to withstand future shifts, ensuring that local communities thrive and businesses remain resilient for generations to come.",
     iconName: "Leaf"
   }
 ];
@@ -81,7 +81,7 @@ export const serviceCategories: ServiceCategory[] = [
     iconName: "GraduationCap",
     colorClass: "from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30",
     details: [
-      "Health, Environment, and Safety (HES) certification training",
+      "Health, Safety, and Environment (HSE) certification training",
       "Incident command systems and crisis management programs",
       "Technical skills instruction for field operators and protective crews",
       "Continuous corporate learning plans and competency reviews",

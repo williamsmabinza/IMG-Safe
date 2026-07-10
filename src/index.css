@@ -5,11 +5,219 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Tailwind 4.0 color theme overrides to instantly convert utilities to Light Theme */
+  --color-slate-950: #FFFFFF;
+  --color-slate-900: #F8FAFC;
+  --color-slate-850: #F1F5F9;
+  --color-slate-800: #E2E8F0;
+  --color-slate-700: #CBD5E1;
+  --color-slate-600: #94A3B8;
+  --color-slate-500: #64748B;
+  --color-slate-400: #475569;
+  --color-slate-300: #334155;
+  --color-slate-200: #1E293B;
+  --color-slate-150: #1E293B;
+  --color-slate-100: #0F172A;
+
+  --color-blue-950: #EAF4FF;
+  --color-blue-900: #E2E8F0;
+  --color-blue-800: #93C5FD;
+  --color-blue-700: #1D4ED8;
+  --color-blue-600: #0A66C2;
+  --color-blue-500: #0F3D91;
 }
 
-/* Base enhancements */
+/* Base enhancements and theme color overrides */
 html {
   scroll-behavior: smooth;
+}
+
+/* Base light theme background & text color */
+body {
+  background-color: #FFFFFF !important;
+  color: #1E293B !important;
+}
+
+/* Explicit class-based style overrides to bypass hardcoded dark hexes in markup */
+section, .bg-\[\#040814\], .bg-slate-950 {
+  background-color: #FFFFFF !important;
+  color: #1E293B !important;
+}
+
+/* Alternate sections get Section Background */
+#about, #contact, .bg-\[\#0b1222\], .bg-[#0b1222] {
+  background-color: #F8FAFC !important;
+  color: #1E293B !important;
+}
+
+/* Header customization */
+#app-header {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Navigation items bar */
+nav.bg-slate-900\/60, nav {
+  background-color: #EAF4FF !important;
+  border-color: #E2E8F0 !important;
+}
+
+.nav-tab {
+  color: #1E293B !important;
+}
+.nav-tab:hover {
+  color: #0A66C2 !important;
+}
+
+/* Logo and Header CTAs */
+#header-cta-btn, #mobile-menu-toggle {
+  background-color: #EAF4FF !important;
+  color: #0A66C2 !important;
+  border-color: #E2E8F0 !important;
+}
+#header-cta-btn:hover, #mobile-menu-toggle:hover {
+  background-color: #0A66C2 !important;
+  color: #FFFFFF !important;
+}
+
+/* Mobile Nav Panel */
+#mobile-nav-panel, .bg-\[\#080e1a\], .bg-\[\#080e1a\]\/95 {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #1E293B !important;
+}
+
+/* Text & Headings inside light sections to be high-contrast dark slate */
+#hero h1, #hero h2, #hero h3, #hero h4, #hero h5, #hero h6,
+#about h1, #about h2, #about h3, #about h4, #about h5, #about h6,
+#services h1, #services h2, #services h3, #services h4, #services h5, #services h6,
+#contact h1, #contact h2, #contact h3, #contact h4, #contact h5, #contact h6 {
+  color: #1E293B !important;
+}
+
+/* Specific elements inside light sections that have helper classes */
+#hero .text-white, #about .text-white, #services .text-white, #contact .text-white {
+  color: #1E293B !important;
+}
+
+#hero h1 {
+  color: #0F3D91 !important;
+}
+
+/* Buttons and Links */
+.bg-blue-600 {
+  background-color: #0A66C2 !important;
+  color: #FFFFFF !important;
+}
+.bg-blue-600:hover {
+  background-color: #0F3D91 !important;
+}
+.border-blue-600\/80 {
+  border-color: #0A66C2 !important;
+  color: #0A66C2 !important;
+}
+.border-blue-600\/80:hover {
+  background-color: #EAF4FF !important;
+}
+
+/* Ensure active button labels inside light sections are white */
+#hero button.bg-blue-600, #hero button.bg-blue-600 *,
+#about button.bg-blue-600, #about button.bg-blue-600 *,
+#services button.bg-blue-600, #services button.bg-blue-600 *,
+#contact button.bg-blue-600, #contact button.bg-blue-600 * {
+  color: #FFFFFF !important;
+}
+
+/* Card overrides for services, team, inquiries etc. */
+.bg-slate-900\/60, .bg-blue-950\/60, .bg-slate-950\/80, .bg-slate-950\/60, .bg-slate-900\/40,
+.bg-\[\#0e1626\]\/80, .bg-\[\#0e1626\]\/90, .bg-\[\#0e1626\], .bg-\[\#111a2d\], .bg-\[\#080e1a\]\/95 {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #1E293B !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Highly visible text slate and blue utility overrides on light backgrounds */
+#hero .text-slate-400, #hero .text-slate-350, #hero .text-slate-300, #hero .text-slate-500, #hero .text-slate-600,
+#about .text-slate-400, #about .text-slate-350, #about .text-slate-300, #about .text-slate-500, #about .text-slate-600,
+#services .text-slate-400, #services .text-slate-350, #services .text-slate-300, #services .text-slate-500, #services .text-slate-600,
+#contact .text-slate-400, #contact .text-slate-350, #contact .text-slate-300, #contact .text-slate-500, #contact .text-slate-600 {
+  color: #475569 !important;
+}
+
+#hero .text-blue-400, #hero .text-blue-300, #hero .text-cyan-400,
+#about .text-blue-400, #about .text-blue-300, #about .text-cyan-400,
+#services .text-blue-400, #services .text-blue-300, #services .text-cyan-400,
+#contact .text-blue-400, #contact .text-blue-300, #contact .text-cyan-400 {
+  color: #0A66C2 !important;
+}
+
+/* Service View Switcher bar and tabs styling */
+.service-view-tab, [id^="services-tab-"] {
+  background-color: transparent !important;
+  color: #475569 !important;
+}
+.service-view-tab:hover, [id^="services-tab-"]:hover {
+  background-color: #E2E8F0 !important;
+  color: #1E293B !important;
+}
+.service-view-tab[class*="bg-blue-600"], [id^="services-tab-"][class*="bg-blue-600"],
+#services-tab-services.bg-blue-600, #services-tab-products.bg-blue-600, #services-tab-sectors.bg-blue-600, #services-tab-clients.bg-blue-600 {
+  background-color: #0A66C2 !important;
+  color: #FFFFFF !important;
+}
+.service-view-tab[class*="bg-blue-600"] *, [id^="services-tab-"][class*="bg-blue-600"] *,
+#services-tab-services.bg-blue-600 *, #services-tab-products.bg-blue-600 *, #services-tab-sectors.bg-blue-600 *, #services-tab-clients.bg-blue-600 * {
+  color: #FFFFFF !important;
+}
+
+/* Hover backgrounds and active tabs */
+.hover\:bg-\[\#111a2d\]:hover {
+  background-color: #EAF4FF !important;
+  border-color: #93C5FD !important;
+}
+
+/* Footer overrides - using the beautiful Dark Blue background */
+#app-footer, .bg-\[\#080d1a\], footer {
+  background-color: #0F3D91 !important;
+  color: #EAF4FF !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+#app-footer h1, #app-footer h2, #app-footer h3, #app-footer h4, #app-footer h5, #app-footer h6, #app-footer .text-white, #app-footer strong {
+  color: #FFFFFF !important;
+}
+#app-footer span, #app-footer p, #app-footer a, #app-footer button, #app-footer div, #app-footer li {
+  color: #EAF4FF !important;
+}
+#app-footer .text-slate-300, #app-footer .text-slate-400, #app-footer .text-slate-500, #app-footer .text-slate-550, #app-footer .text-slate-600 {
+  color: #EAF4FF !important;
+}
+#app-footer button:hover, #app-footer a:hover, #app-footer .hover\:text-blue-400:hover {
+  color: #93C5FD !important;
+  opacity: 1;
+}
+
+/* Input and Form fields */
+input, textarea, select {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #1E293B !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #0A66C2 !important;
+  outline: none;
+}
+
+/* Slogan/Bottom strips */
+.bg-slate-950\/60 {
+  background-color: #EAF4FF !important;
+  border-color: #E2E8F0 !important;
+}
+.bg-slate-950\/60 span, .bg-slate-950\/60 i {
+  color: #0F3D91 !important;
 }
 
 /* Scrollbar styling */
@@ -17,27 +225,19 @@ html {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9; /* slate-100 */
+  background: #F8FAFC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1; /* slate-300 */
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8; /* slate-400 */
+  background: #94A3B8;
 }
 
-/* Glow effects */
-.glow-indigo {
-  box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.15);
-}
+/* Glow effects in light theme */
 .glow-blue {
-  box-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.15);
+  box-shadow: 0 10px 30px -5px rgba(10, 102, 194, 0.12);
 }
-.glow-emerald {
-  box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.15);
-}
-.glow-amber {
-  box-shadow: 0 10px 30px -5px rgba(245, 158, 11, 0.15);
-}
+
 

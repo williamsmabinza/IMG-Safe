@@ -167,8 +167,7 @@ export default function Contact() {
                 IMG Safe HQ Office
               </h3>
               <p className="text-sm text-slate-300 leading-relaxed font-sans">
-                Our operations team is available Monday through Friday, 8:00 AM to 5:00 PM (EAT). 
-                For emergency incident mitigation, our standby experts can be reached 24/7.
+                Our operations team is available Monday through Friday, 8:00 AM to 5:00 PM, and Saturday, 08:00 AM to 1:00 PM (EAT). 
               </p>
             </div>
 
@@ -345,7 +344,7 @@ export default function Contact() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="e.g. Sourcing quote / HES Training Session"
+                    placeholder="e.g. Sourcing quote / HSE Training Session"
                     className={`w-full px-4 py-3 rounded-xl bg-slate-950/80 border text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-600 focus:bg-slate-950 focus:ring-1 focus:ring-blue-600 transition-all ${
                       validationErrors.subject ? 'border-red-500/50' : 'border-slate-800'
                     }`}
