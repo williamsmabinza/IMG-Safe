@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IMG Safe - Incident Management Global</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M50 15 L25 40 L50 65 Z' fill='%231E51C7' /%3E%3Cpath d='M50 15 L50 65 L75 40 Z' fill='%2313388E' /%3E%3Cpath d='M50 70 L25 45 L25 63 L50 88 Z' fill='%23949AA5' /%3E%3Cpath d='M50 70 L50 88 L75 63 L75 45 Z' fill='%237A808C' /%3E%3C/svg%3E" />
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -255,6 +258,63 @@
       .bg-slate-950\/60 span, .bg-slate-950\/60 i {
         color: #0F3D91 !important;
       }
+
+      /* Specific overrides for the `#services` header to ensure visibility on the dark blue background */
+      #services h2,
+      #services h2.text-white {
+        color: #FFFFFF !important;
+      }
+      #services p.text-slate-400,
+      #services p.text-slate-300 {
+        color: #E2E8F0 !important;
+      }
+      #services span.font-mono,
+      #services span.text-blue-400 {
+        color: #93C5FD !important;
+      }
+      #services p.italic {
+        color: #E2E8F0 !important;
+      }
+
+      /* Headquarters Map Card text visibility overrides */
+      #hq-map-card {
+        background-color: #FFFFFF !important;
+        border-color: #E2E8F0 !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+      }
+      #hq-map-card strong, #hq-map-card strong.text-white {
+        color: #0F172A !important;
+      }
+      #hq-map-card, #hq-map-card .text-slate-400 {
+        color: #475569 !important;
+      }
+
+      /* Footer Back to Top button custom styling for high visibility and blue theme alignment */
+      #footer-back-to-top,
+      #footer-back-to-top span,
+      #footer-back-to-top i,
+      #footer-back-to-top svg {
+        color: #0A66C2 !important;
+        font-weight: 600 !important;
+      }
+
+      #footer-back-to-top {
+        background-color: #FFFFFF !important;
+        border: 1px solid #93C5FD !important;
+        transition: all 0.2s ease-in-out !important;
+      }
+
+      #footer-back-to-top:hover,
+      #footer-back-to-top:hover span,
+      #footer-back-to-top:hover i,
+      #footer-back-to-top:hover svg {
+        color: #FFFFFF !important;
+      }
+
+      #footer-back-to-top:hover {
+        background-color: #0A66C2 !important;
+        border-color: #0F3D91 !important;
+      }
     </style>
   </head>
   <body class="min-h-screen bg-[#040814] text-slate-150 font-sans selection:bg-blue-600 selection:text-white overflow-x-hidden custom-scrollbar">
@@ -273,7 +333,7 @@
             </div>
             <div>
               <div class="flex items-center gap-1.5">
-                <span class="font-display font-bold text-xl tracking-wide text-white">IMG SAFE</span>
+                <span class="font-display font-bold text-xl tracking-wide text-blue-500">IMG SAFE</span>
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
               </div>
               <span class="block text-[10px] font-mono tracking-wider text-slate-400 uppercase leading-none">
@@ -921,24 +981,16 @@
           <!-- Column 3 -->
           <div class="lg:col-span-5 space-y-4">
             <h4 class="font-display font-semibold text-white text-sm uppercase tracking-wider">Headquarters Location</h4>
-            <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-850 space-y-3 shadow-xl">
-              <!-- Custom wireframe map -->
-              <div class="relative h-28 w-full bg-slate-950 border border-slate-850 rounded-lg overflow-hidden flex items-center justify-center font-mono text-[10px] text-slate-500">
-                <div class="absolute inset-0 opacity-[0.05] invert" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 16px 16px;"></div>
-                <div class="absolute top-[40%] inset-x-0 h-4 bg-slate-900 border-y border-slate-800 rotate-[-2deg] flex items-center justify-center">
-                  <span class="text-[7px] text-slate-400 uppercase tracking-widest">Kawawa Road</span>
-                </div>
-                <div class="absolute bottom-2 right-4 w-24 h-10 bg-emerald-950/20 border border-emerald-900/30 rounded flex items-center justify-center">
-                  <span class="text-[7px] text-emerald-450 uppercase tracking-wider font-semibold">Biafra Grounds</span>
-                </div>
-                <div class="absolute top-2 left-6 text-slate-500 text-[6px]">Uporoto St</div>
-                <div class="absolute bottom-1 left-4 text-slate-500 text-[6px]">Sapour St</div>
-                <div class="absolute top-[35%] left-[45%] flex flex-col items-center gap-1 z-10 animate-bounce">
-                  <div class="p-1 rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/40">
-                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-                  </div>
-                </div>
-                <span class="absolute bottom-1.5 left-1.5 text-[8px] text-slate-500">Kinondoni Biafra Area</span>
+            <div id="hq-map-card" class="p-4 rounded-xl bg-slate-900/40 border border-slate-850 space-y-3 shadow-xl">
+              <!-- Real Google Maps Iframe with high street visibility -->
+              <div class="relative h-44 w-full bg-slate-100 border border-slate-200 rounded-lg overflow-hidden flex items-center justify-center shadow-inner">
+                <iframe 
+                  src="https://maps.google.com/maps?q=Biafra%20Grounds%2C%20Kawawa%20Road%2C%20Dar%20es%20Salaam&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                  class="w-full h-full border-0" 
+                  allowfullscreen="" 
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
               </div>
               <div class="text-[11px] leading-relaxed font-sans text-slate-400">
                 <strong class="text-white font-semibold">Plot no. 4, Block no. 36, Kinondoni Biafra</strong><br />
@@ -952,7 +1004,7 @@
         <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
           <div><span>&copy; <span id="copyright-year">2026</span> IMG SAFE. All Rights Reserved.</span></div>
           <div>
-            <button onclick="scrollToTop()" class="p-2 px-3 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 hover:bg-slate-950 text-slate-300 hover:text-blue-400 transition flex items-center gap-1.5 shadow-md">
+            <button id="footer-back-to-top" onclick="scrollToTop()" class="p-2 px-3 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 hover:bg-slate-950 text-slate-300 hover:text-blue-400 transition flex items-center gap-1.5 shadow-md">
               <span>Back to Top</span><i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
             </button>
           </div>

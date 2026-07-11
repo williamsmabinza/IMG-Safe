@@ -240,4 +240,62 @@ input:focus, textarea:focus, select:focus {
   box-shadow: 0 10px 30px -5px rgba(10, 102, 194, 0.12);
 }
 
+/* Specific overrides for the `#services` header to ensure visibility on the dark blue background */
+#services h2,
+#services h2.text-white {
+  color: #FFFFFF !important;
+}
+#services p.text-slate-400,
+#services p.text-slate-300 {
+  color: #E2E8F0 !important;
+}
+#services span.font-mono,
+#services span.text-blue-400 {
+  color: #93C5FD !important;
+}
+#services p.italic {
+  color: #E2E8F0 !important;
+}
+
+/* Headquarters Map Card text visibility overrides */
+#hq-map-card {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+}
+#hq-map-card strong, #hq-map-card strong.text-white {
+  color: #0F172A !important;
+}
+#hq-map-card, #hq-map-card .text-slate-400 {
+  color: #475569 !important;
+}
+
+/* Footer Back to Top button custom styling for high visibility and blue theme alignment */
+#footer-back-to-top,
+#footer-back-to-top span,
+#footer-back-to-top i,
+#footer-back-to-top svg {
+  color: #0A66C2 !important;
+  font-weight: 600 !important;
+}
+
+#footer-back-to-top {
+  background-color: #FFFFFF !important;
+  border: 1px solid #93C5FD !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+#footer-back-to-top:hover,
+#footer-back-to-top:hover span,
+#footer-back-to-top:hover i,
+#footer-back-to-top:hover svg {
+  color: #FFFFFF !important;
+}
+
+#footer-back-to-top:hover {
+  background-color: #0A66C2 !important;
+  border-color: #0F3D91 !important;
+}
+
+
 

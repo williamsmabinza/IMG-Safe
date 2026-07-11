@@ -83,7 +83,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-display font-bold text-xl tracking-wide text-white">IMG SAFE</span>
+                <span className="font-display font-bold text-xl tracking-wide text-blue-500">IMG SAFE</span>
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
               </div>
               <span className="block text-[10px] font-mono tracking-wider text-slate-400 uppercase leading-none">
