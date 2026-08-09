@@ -315,6 +315,116 @@
         background-color: #0A66C2 !important;
         border-color: #0F3D91 !important;
       }
+
+      /* High visibility text inside white cards/containers in the Services section */
+      #services [class*="bg-[#0e1626]"] p,
+      #services [class*="bg-slate-900"] p,
+      #services [class*="bg-[#111a2d]"] p,
+      #services [class*="bg-slate-950"] p,
+      #services [id^="service-card-"] p,
+      #services [id^="value-card-"] p,
+      #services #core-services-list p,
+      #services #key-sectors-grid p,
+      #services #product-category-details-panel p,
+      #services #product-category-details-panel div,
+      #services #product-cat-sidebar p,
+      #services .service-panel-view p,
+      #services .service-panel-view span.text-slate-400 {
+        color: #334155 !important;
+      }
+
+      #core-services-list li,
+      #core-services-list li span,
+      #key-sectors-grid p {
+        color: #475569 !important;
+      }
+
+      /* Premium 3D-like float effects for core services cards */
+      [id^="service-card-"] {
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      }
+      [id^="service-card-"]:hover {
+        transform: translateY(-8px) scale(1.02) !important;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+        border-color: #0A66C2 !important;
+      }
+
+      /* Cool animated client placeholder badges with high visibility dark-blue glass card styling */
+      .client-placeholder-badge {
+        position: relative;
+        overflow: hidden;
+        background-color: rgba(14, 22, 38, 0.85) !important;
+        border: 1.5px solid rgba(59, 130, 246, 0.25) !important;
+        border-radius: 1rem !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4) !important;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        animation: badgeFloat 6s ease-in-out infinite;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: 120px !important;
+        padding: 1.25rem !important;
+        width: 100% !important;
+        backdrop-filter: blur(12px);
+      }
+      
+      .client-placeholder-badge span {
+        color: #F8FAFC !important;
+        font-weight: 500 !important;
+      }
+      
+      .client-placeholder-badge span.font-mono {
+        color: #94A3B8 !important;
+        font-size: 10px !important;
+        letter-spacing: 0.05em !important;
+        font-weight: 600 !important;
+        opacity: 0.95;
+      }
+      
+      .client-placeholder-badge:nth-child(2n) {
+        animation-delay: 1s;
+      }
+      .client-placeholder-badge:nth-child(3n) {
+        animation-delay: 2s;
+      }
+      .client-placeholder-badge:nth-child(4n) {
+        animation-delay: 3s;
+      }
+      .client-placeholder-badge:nth-child(5n) {
+        animation-delay: 4s;
+      }
+
+      @keyframes badgeFloat {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      .client-placeholder-badge:hover {
+        transform: translateY(-12px) scale(1.05) !important;
+        box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.3), 0 10px 10px -5px rgba(37, 99, 235, 0.2) !important;
+        border-color: #3b82f6 !important;
+        background-color: rgba(20, 30, 55, 0.95) !important;
+        animation-play-state: paused;
+      }
+
+      /* Glowing pulse effect inside badges */
+      .client-placeholder-badge::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.8s ease;
+      }
+      .client-placeholder-badge:hover::after {
+        transform: translateX(100%);
+      }
     </style>
   </head>
   <body class="min-h-screen bg-[#040814] text-slate-150 font-sans selection:bg-blue-600 selection:text-white overflow-x-hidden custom-scrollbar">
@@ -346,6 +456,9 @@
           <nav class="hidden md:flex items-center bg-slate-900/60 p-1 rounded-full border border-slate-800 shadow-inner backdrop-blur-sm">
             <button onclick="scrollToSection('hero')" id="nav-tab-hero" class="nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-white bg-blue-600 shadow-md shadow-blue-600/30">
               Home
+            </button>
+            <button onclick="scrollToSection('portfolio')" id="nav-tab-portfolio" class="nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white">
+              Field Portfolio
             </button>
             <button onclick="scrollToSection('about')" id="nav-tab-about" class="nav-tab relative px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition duration-300 text-slate-400 hover:text-white">
               Our Team
@@ -380,6 +493,9 @@
         <div class="px-4 pt-2 pb-6 space-y-2">
           <button onclick="scrollToSection('hero')" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between bg-blue-950/40 text-blue-400 border border-blue-900/40">
             <span>Home</span><span class="w-2 h-2 rounded-full bg-blue-500"></span>
+          </button>
+          <button onclick="scrollToSection('portfolio')" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between text-slate-400 hover:bg-slate-900 hover:text-white border border-transparent">
+            <span>Field Portfolio</span>
           </button>
           <button onclick="scrollToSection('about')" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between text-slate-400 hover:bg-slate-900 hover:text-white border border-transparent">
             <span>Our Team</span>
@@ -481,34 +597,91 @@
 
           <!-- Actions -->
           <div class="flex flex-col sm:flex-row gap-4 pt-4">
-            <button onclick="scrollToSection('services')" class="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 group shadow-lg shadow-blue-600/20 hover:shadow-blue-600/35 transition duration-300">
-              <span>Explore Sourcing</span>
-              <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform"></i>
+            <button onclick="scrollToSection('portfolio')" class="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 group shadow-lg shadow-blue-600/20 hover:shadow-blue-600/35 transition duration-300">
+              <span>View Field Portfolio</span>
+              <i data-lucide="camera" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
             </button>
             <button onclick="scrollToSection('contact')" class="px-8 py-4 rounded-xl bg-transparent border border-blue-600/80 hover:border-blue-500 text-white hover:bg-blue-950/40 font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition duration-300 shadow-md">
-              <span>Request Quote</span>
+              <span>Request Site Audit</span>
             </button>
           </div>
         </div>
 
-        <!-- Right Graphic Column -->
-        <div class="lg:col-span-5 relative h-[400px] sm:h-[500px] w-full flex items-center justify-center">
-          <div class="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl border border-slate-900/80 bg-slate-950/40 backdrop-blur-sm shadow-2xl">
-            <div class="absolute top-[-20%] left-[-20%] w-[140%] h-[140%] bg-gradient-to-br from-slate-950/95 via-slate-900/40 to-slate-950/95 skew-x-[-15deg] border-r border-slate-900/60 shadow-inner z-0"></div>
-            <div class="absolute bottom-[20%] left-[-20%] w-[160%] h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent rotate-[-15deg] blur-[1px] shadow-[0_0_15px_#2563eb] opacity-80 z-10"></div>
-            <div class="absolute top-[25%] left-[-20%] w-[160%] h-[3px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent rotate-[-15deg] blur-[2px] shadow-[0_0_20px_#06b6d4] opacity-70 z-10"></div>
-            <div class="absolute top-[25%] left-[25%] w-[250px] h-[250px] rounded-full bg-blue-600/15 blur-[100px] z-0"></div>
-          </div>
-          <div class="absolute inset-4 opacity-[0.22] pointer-events-none z-0" style="background-image: radial-gradient(#2563eb 1.5px, transparent 1.5px); background-size: 16px 16px;"></div>
-          
-          <!-- 3D Float Logo container -->
-          <div id="hero-giant-logo-container" class="relative z-10 flex items-center justify-center cursor-pointer animate-float-3d group">
-            <!-- Giant SVG Logo injected here -->
+        <!-- Right Graphic Column with Scrolling Parallax Effects & Field Photo Reel -->
+        <div class="lg:col-span-5 relative h-[480px] sm:h-[540px] w-full flex items-center justify-center">
+          <!-- Glass Stage Frame -->
+          <div class="absolute inset-0 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl transition duration-500 group">
+            <!-- Background Parallax Image Layer -->
+            <div id="hero-parallax-container" class="absolute inset-0 transition-transform duration-700 ease-out">
+              <img id="hero-featured-image" src="/src/assets/images/image1.jpeg" alt="Field Safety Engineer" class="w-full h-full object-cover transition-all duration-700 filter brightness-[0.9] contrast-[1.05] group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
+            </div>
+
+            <!-- Floating Top Badges -->
+            <div class="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700 text-white shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-[11px] font-mono tracking-wider uppercase font-bold text-white">Live Field Audit</span>
+              </div>
+              <div class="px-3 py-1.5 rounded-full bg-blue-600/90 backdrop-blur-md text-white font-mono text-[11px] font-bold tracking-wider shadow-lg">
+                ISO 45001
+              </div>
+            </div>
+
+            <!-- Floating Overlay Glass Badge 1 (Bottom Left) -->
+            <div id="hero-badge-1" class="absolute bottom-20 left-4 z-20 max-w-[240px] p-3.5 rounded-2xl bg-white/95 backdrop-blur-md border border-blue-100 shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div class="flex items-center gap-3">
+                <div class="p-2 rounded-xl bg-blue-50 text-blue-600 shrink-0">
+                  <i data-lucide="shield-check" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="block text-[11px] font-bold text-slate-900 leading-tight">Twiga Cement Plant</span>
+                  <span class="block text-[10px] font-mono font-semibold text-blue-600">365 Days Zero LTI</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Overlay Glass Badge 2 (Bottom Right) -->
+            <div id="hero-badge-2" class="absolute bottom-20 right-4 z-20 p-3 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700 text-white shadow-xl hidden sm:flex items-center gap-2.5">
+              <div class="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400">
+                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+              </div>
+              <div class="text-[10px] font-mono">
+                <span class="text-slate-300 block">Height Safety</span>
+                <span class="text-emerald-400 font-bold block">Certified 100%</span>
+              </div>
+            </div>
+
+            <!-- Bottom Slide Controls Overlay Bar -->
+            <div class="absolute bottom-0 inset-x-0 p-4 z-20 bg-slate-950/80 backdrop-blur-md border-t border-slate-800 flex items-center justify-between">
+              <!-- Slide Label -->
+              <div class="space-y-0.5">
+                <div id="hero-slide-title" class="text-xs font-bold text-white font-display tracking-wide">
+                  01. Technical Control Box Inspection
+                </div>
+                <div id="hero-slide-location" class="text-[10px] font-mono text-slate-400">
+                  Twiga Cement Quarry Site • Dar es Salaam
+                </div>
+              </div>
+
+              <!-- Controls & Indicators -->
+              <div class="flex items-center gap-2">
+                <button onclick="prevHeroSlide()" class="p-2 rounded-lg bg-slate-800/80 hover:bg-blue-600 text-white transition border border-slate-700 shadow-sm" title="Previous Slide">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <div class="flex items-center gap-1.5 px-2" id="hero-slide-dots">
+                  <!-- Dots generated dynamically -->
+                </div>
+                <button onclick="nextHeroSlide()" class="p-2 rounded-lg bg-slate-800/80 hover:bg-blue-600 text-white transition border border-slate-700 shadow-sm" title="Next Slide">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Slogan Bottom Strip -->
+      <!-- Slogan Bottom Strip with Scroll Indicator -->
       <div class="w-full border-t border-slate-900/60 bg-slate-950/60 backdrop-blur-md py-4 mt-8 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] sm:text-xs font-mono text-slate-400">
           <div class="flex items-center gap-2.5">
@@ -517,12 +690,170 @@
             <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
             <span class="text-cyan-400 font-bold tracking-widest uppercase">ONE GLOBAL COMMITMENT TO SAFETY.</span>
           </div>
-          <div class="flex items-center gap-2 tracking-widest text-slate-300 font-bold uppercase">
-            <span>PREPARE. RESPOND. RECOVER. IMPROVE.</span>
+          <div onclick="scrollToSection('portfolio')" class="flex items-center gap-2 text-blue-400 hover:text-white transition font-bold uppercase cursor-pointer group">
+            <span>Scroll For Operational Portfolio</span>
+            <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform animate-bounce"></i>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- 2. PORTFOLIO GALLERY SECTION -->
+    <section id="portfolio" class="relative py-24 bg-white border-t border-slate-200 overflow-hidden">
+      <!-- Ambient Background Elements -->
+      <div class="absolute top-[10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-blue-50/80 blur-[100px] pointer-events-none"></div>
+      <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-sky-50/80 blur-[100px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-mono font-bold tracking-wider uppercase shadow-xs">
+            <i data-lucide="image" class="w-3.5 h-3.5 text-blue-600"></i>
+            <span>Operational Field Portfolio & Site Gallery</span>
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 uppercase">
+            Proven Site Operations & Safety Audits
+          </h2>
+          <div class="h-[3px] w-28 bg-gradient-to-r from-blue-600 via-sky-400 to-transparent rounded-full mx-auto"></div>
+          <p class="text-slate-600 text-sm sm:text-base font-sans leading-relaxed">
+            Real field documentation from industrial plant audits, height safety enforcement, heavy transportation inspections, and workforce safety training workshops across East Africa.
+          </p>
+        </div>
+
+        <!-- Filter Tabs & Real-Time Search Bar -->
+        <div class="space-y-6 mb-12">
+          <!-- Category Filter Bar -->
+          <div class="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-slate-100/80 rounded-2xl border border-slate-200 max-w-4xl mx-auto shadow-inner">
+            <button onclick="filterPortfolio('all')" id="portfolio-filter-all" class="portfolio-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all duration-200 bg-blue-600 text-white shadow-md">
+              All Operations (<span id="count-all">12</span>)
+            </button>
+            <button onclick="filterPortfolio('field-audits')" id="portfolio-filter-field-audits" class="portfolio-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200">
+              Field & Electrical
+            </button>
+            <button onclick="filterPortfolio('height-safety')" id="portfolio-filter-height-safety" class="portfolio-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200">
+              Height & Harness
+            </button>
+            <button onclick="filterPortfolio('fleet-transport')" id="portfolio-filter-fleet-transport" class="portfolio-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200">
+              Heavy Fleet
+            </button>
+            <button onclick="filterPortfolio('cement-plant')" id="portfolio-filter-cement-plant" class="portfolio-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200">
+              Cement Plants
+            </button>
+            <button onclick="filterPortfolio('classroom-training')" id="portfolio-filter-classroom-training" class="portfolio-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200">
+              Safety Workshops
+            </button>
+          </div>
+
+          <!-- Search Input -->
+          <div class="max-w-md mx-auto relative">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <input type="text" id="portfolio-search-input" oninput="searchPortfolio(this.value)" placeholder="Search audits by title, client, or location..." class="w-full pl-11 pr-4 py-2.5 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 shadow-xs" />
+          </div>
+        </div>
+
+        <!-- Portfolio Cards Grid -->
+        <div id="portfolio-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Dynamic Portfolio Cards Injected Here via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FULLSCREEN PORTFOLIO LIGHTBOX MODAL -->
+    <div id="portfolio-lightbox-modal" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-xl flex flex-col justify-between overflow-y-auto p-4 sm:p-6 transition-all duration-300">
+      <!-- Modal Top Bar -->
+      <div class="max-w-7xl mx-auto w-full flex items-center justify-between pb-4 border-b border-slate-800 text-white shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="p-2 rounded-xl bg-blue-600/30 border border-blue-500/30 text-blue-400">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <span id="modal-project-title" class="font-display font-bold text-base sm:text-lg text-white block leading-snug">Project Title</span>
+            <span id="modal-project-category" class="font-mono text-[11px] text-blue-400 uppercase tracking-wider block">Category</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="prevPortfolioModalItem()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-blue-600 text-white transition border border-slate-700" title="Previous Image (Left Arrow)">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+          <span id="modal-counter-indicator" class="font-mono text-xs text-slate-400 px-2">1 / 12</span>
+          <button onclick="nextPortfolioModalItem()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-blue-600 text-white transition border border-slate-700" title="Next Image (Right Arrow)">
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
+          <button onclick="closePortfolioModal()" class="p-2.5 rounded-xl bg-rose-950/80 hover:bg-rose-600 text-white transition border border-rose-800/80 ml-2" title="Close Modal (Escape)">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Image Stage + Case Details) -->
+      <div class="max-w-7xl mx-auto w-full my-auto py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Main Image Display -->
+        <div class="lg:col-span-8 relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl group flex items-center justify-center max-h-[70vh]">
+          <img id="modal-main-image" src="" alt="Portfolio Image" class="w-full h-auto max-h-[70vh] object-contain transition-transform duration-300" />
+          <div id="modal-image-caption" class="absolute bottom-0 inset-x-0 p-4 bg-slate-950/80 backdrop-blur-md border-t border-slate-800 text-xs font-mono text-slate-300 flex items-center justify-between">
+            <span id="modal-caption-text">Caption text</span>
+            <span id="modal-location-text" class="text-blue-400 font-semibold">Location</span>
+          </div>
+        </div>
+
+        <!-- Case Breakdown Column -->
+        <div class="lg:col-span-4 space-y-6 text-slate-200">
+          <!-- Client & Status Badge -->
+          <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div>
+              <span class="block text-[10px] font-mono uppercase text-slate-400">Client Partner</span>
+              <span id="modal-client-name" class="font-display font-bold text-lg text-white">Client Name</span>
+            </div>
+            <span id="modal-status-badge" class="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-emerald-950/80 text-emerald-400 border border-emerald-800">
+              Verified
+            </span>
+          </div>
+
+          <!-- Key Details List -->
+          <div class="space-y-3 font-sans text-xs sm:text-sm">
+            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+              <i data-lucide="map-pin" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+              <div>
+                <span class="block text-[10px] font-mono text-slate-400 uppercase">Site Location</span>
+                <span id="modal-detail-location" class="font-medium text-white">Location</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+              <i data-lucide="award" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+              <div>
+                <span class="block text-[10px] font-mono text-slate-400 uppercase">Compliance Standard</span>
+                <span id="modal-detail-standard" class="font-medium text-white">Standard</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-blue-950/40 border border-blue-900/40 space-y-2">
+              <div class="flex items-center gap-2 text-blue-400 font-mono text-xs font-bold uppercase">
+                <i data-lucide="file-check-2" class="w-4 h-4"></i>
+                <span>Field Audit Breakdown</span>
+              </div>
+              <p id="modal-detail-description" class="text-xs text-slate-300 font-sans leading-relaxed">
+                Description
+              </p>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="pt-2 flex gap-3">
+            <button onclick="scrollToSection('contact'); closePortfolioModal();" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30">
+              <i data-lucide="phone-call" class="w-4 h-4"></i>
+              <span>Request Similar Site Audit</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Bottom Navigation Thumbnails Bar -->
+      <div class="max-w-7xl mx-auto w-full pt-4 border-t border-slate-800 flex items-center justify-center gap-3 overflow-x-auto custom-scrollbar shrink-0" id="modal-thumbnails-container">
+        <!-- Thumbnail strip dynamically populated -->
+      </div>
+    </div>
 
     <!-- 3. ABOUT SECTION -->
     <section id="about" class="relative py-24 bg-[#0b1222] border-t border-slate-900 overflow-hidden">
@@ -758,7 +1089,7 @@
             </div>
             <!-- Client Badges Grid -->
             <div id="client-badges-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"></div>
-            <p class="text-center text-xs text-slate-400 font-sans max-w-xl mx-auto italic">
+            <p class="text-center text-xs sm:text-sm font-sans max-w-xl mx-auto italic" style="color: #ffffff !important; opacity: 1 !important;">
               "Sustainable success requires the flexibility to adapt to a changing environment. We work collaboratively with our clients by bringing in the necessary expertise while the client drives the implementation."
             </p>
           </div>
@@ -1042,8 +1373,8 @@
           cityCountry: "Dar Es Salaam, Tanzania",
           poBox: "P. O. Box 6504",
           phones: ["+255 786 205 254", "+255 762 695 044", "+255 768 613 613"],
-          whatsapps: ["+255 786 205 254", "+255 713 904 813"],
-          email: "info@imgsafeltd.co.tz"
+          whatsapps: ["+255 786 205 254", "+255 768 613 613"],
+          email: "info@imgsafe.co.tz"
         }
       };
 
@@ -1240,19 +1571,157 @@
         { name: "Transportation & Logistics", icon: "truck", desc: "Managing hazardous cargo, bulk fuel transport, and fleet compliance." }
       ];
 
+      // CUSTOM BRANDE COMPONENT SVG LOGOS FOR CORPORATE PARTNERS
+      function getClientLogoSVG(name) {
+        switch (name) {
+          case "Tristar":
+            return `
+              <svg viewBox="0 0 130 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <path d="M4 10 L16 20 L4 30 Z" fill="#E11D48" />
+                  <path d="M14 10 L26 20 L14 30 Z" fill="#BE123C" />
+                  <path d="M24 10 L36 20 L24 30 Z" fill="#9F1239" />
+                </g>
+                <text x="44" y="23" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" letter-spacing="1.5">TRISTAR</text>
+              </svg>
+            `;
+          case "Primefuels":
+            return `
+              <svg viewBox="0 0 140 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <path d="M14 28 C10 28 6 24 6 20 C6 14 14 6 14 6 C14 6 22 14 22 20 C22 24 18 28 14 28 Z" fill="#2563EB" />
+                  <path d="M14 28 C11.5 28 9.5 26 9.5 22.5 C9.5 18 14 12.5 14 12.5 C14 12.5 18.5 18 18.5 22.5 C18.5 26 16.5 28 14 28 Z" fill="#F97316" />
+                </g>
+                <text x="32" y="23" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="900" font-size="13" fill="#FFFFFF" letter-spacing="1">PRIMEFUELS</text>
+              </svg>
+            `;
+          case "Bakhresa Group":
+            return `
+              <svg viewBox="0 0 150 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <circle cx="15" cy="18" r="11" fill="#F97316" />
+                  <path d="M11 23 L15 11 L19 23 M12 20 L18 20" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+                <text x="34" y="19" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="900" font-size="11" fill="#FFFFFF" letter-spacing="0.5">BAKHRESA</text>
+                <text x="34" y="28" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="7" fill="#F97316" letter-spacing="2">GROUP</text>
+              </svg>
+            `;
+          case "TPC Limited":
+            return `
+              <svg viewBox="0 0 120 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <path d="M6 18 C6 10 12 8 16 8 C16 8 14 14 11 19 C9 22 6 24 6 24 Z" fill="#16A34A" />
+                  <path d="M18 18 C18 10 12 8 8 8 C8 8 10 14 13 19 C15 22 18 24 18 24 Z" fill="#15803D" />
+                  <circle cx="12" cy="11" r="2.5" fill="#EAB308" />
+                </g>
+                <text x="26" y="23" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="900" font-size="15" fill="#FFFFFF" letter-spacing="1">TPC</text>
+                <text x="58" y="23" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="600" font-size="10" fill="#16A34A" letter-spacing="0.5">LIMITED</text>
+              </svg>
+            `;
+          case "Tanzania Polisi":
+            return `
+              <svg viewBox="0 0 140 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <path d="M15 6 L25 10 L25 19 C25 24 21 28 15 30 C9 28 5 24 5 19 L5 10 Z" fill="#1E3A8A" stroke="#EAB308" stroke-width="1.5" />
+                  <polygon points="15,11 16.5,14 19.5,14 17.2,16 18,19 15,17.5 12,19 12.8,16 10.5,14 13.5,14" fill="#EAB308" />
+                </g>
+                <text x="32" y="18" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="11" fill="#FFFFFF" letter-spacing="0.5">TANZANIA</text>
+                <text x="32" y="27" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="600" font-size="9" fill="#60A5FA" letter-spacing="1.5">POLISI</text>
+              </svg>
+            `;
+          case "Bank of Tanzania":
+            return `
+              <svg viewBox="0 0 140 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <circle cx="15" cy="18" r="11" fill="#1E293B" stroke="#CA8A04" stroke-width="1.5" />
+                  <path d="M10 22 L20 22 M11 22 L11 16 M15 22 L15 16 M19 22 L19 16 M10 16 L20 16 L15 12 Z" stroke="#CA8A04" stroke-width="1.2" stroke-linejoin="round" />
+                </g>
+                <text x="32" y="18" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="10" fill="#FFFFFF">BANK OF</text>
+                <text x="32" y="27" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" font-size="9" fill="#CA8A04" letter-spacing="1">TANZANIA</text>
+              </svg>
+            `;
+          case "Tanesco":
+            return `
+              <svg viewBox="0 0 130 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <circle cx="14" cy="18" r="10" fill="none" stroke="#16A34A" stroke-width="2" />
+                  <path d="M15 9 L9 18 L14 18 L12 27 L20 16 L15 16 Z" fill="#EAB308" />
+                </g>
+                <text x="29" y="23" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" letter-spacing="1">TANESCO</text>
+              </svg>
+            `;
+          case "AngloGold Ashanti":
+            return `
+              <svg viewBox="0 0 150 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <path d="M5 25 L13 9 L21 25 M9 17 L17 17" stroke="#CA8A04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                  <path d="M11 25 L19 9 L27 25" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                </g>
+                <text x="34" y="18" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="10" fill="#FFFFFF" letter-spacing="0.5">ANGLOGOLD</text>
+                <text x="34" y="27" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="500" font-size="9" fill="#94A3B8" letter-spacing="1">ASHANTI</text>
+              </svg>
+            `;
+          case "Simba Logistics":
+            return `
+              <svg viewBox="0 0 150 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <rect x="4" y="8" width="20" height="20" rx="5" fill="#DC2626" />
+                  <path d="M10 13 C10 13 11.5 11.5 14 11.5 C16.5 11.5 18 13 18 15.5 C18 18 15.5 19 14 20.5 L14 23 M14 25 L14 25" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" fill="none" />
+                </g>
+                <text x="30" y="18" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="12" fill="#FFFFFF" letter-spacing="0.5">SIMBA</text>
+                <text x="30" y="27" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="600" font-size="9" fill="#DC2626" letter-spacing="1">LOGISTICS</text>
+              </svg>
+            `;
+          case "Puma Energy":
+            return `
+              <svg viewBox="0 0 150 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <path d="M5 8 L20 8 L12 24 Z" fill="#10B981" />
+                  <path d="M20 8 L12 24 L25 24 Z" fill="#EF4444" />
+                </g>
+                <text x="30" y="22" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="900" font-size="13" fill="#FFFFFF" letter-spacing="0.5">PUMA ENERGY</text>
+              </svg>
+            `;
+          case "Jambo":
+            return `
+              <svg viewBox="0 0 130 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <circle cx="12" cy="18" r="9" fill="#E11D48" />
+                  <path d="M12 13 L12 21 C12 23.5 10 24 8.5 23" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none" />
+                </g>
+                <text x="26" y="18" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="12" fill="#FFFFFF" letter-spacing="0.5">JAMBO</text>
+                <text x="26" y="27" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="600" font-size="9" fill="#E11D48" letter-spacing="1">GROUP</text>
+              </svg>
+            `;
+          case "Siginon Group":
+            return `
+              <svg viewBox="0 0 140 35" class="h-6 sm:h-7 w-auto inline-block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="transition-transform duration-300 group-hover:scale-105">
+                  <path d="M4 12 C9 12 14 15 19 22 C14 22 9 19 4 12 Z" fill="#0284C7" />
+                  <path d="M9 9 C14 9 19 12 24 19 C19 19 14 16 9 9 Z" fill="#38BDF8" />
+                </g>
+                <text x="30" y="18" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="11" fill="#FFFFFF" letter-spacing="0.5">SIGINON</text>
+                <text x="30" y="27" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="600" font-size="9" fill="#38BDF8" letter-spacing="1">GROUP</text>
+              </svg>
+            `;
+          default:
+            return `<span class="font-display font-bold text-sm tracking-wider block">${name}</span>`;
+        }
+      }
+
       const clientList = [
-        { name: "Tristar", logo: "TRISTAR", color: "bg-red-950/40 text-red-400 border-red-500/20" },
-        { name: "Primefuels", logo: "PRIMEFUELS", color: "bg-blue-950/40 text-blue-400 border-blue-500/20" },
-        { name: "Bakhresa Group", logo: "BAKHRESA GROUP", color: "bg-orange-950/40 text-orange-400 border-orange-500/20" },
-        { name: "TPC Limited", logo: "TPC LIMITED", color: "bg-emerald-950/40 text-emerald-400 border-emerald-500/20" },
-        { name: "Tanzania Polisi", logo: "POLISI TZ", color: "bg-indigo-950/40 text-indigo-400 border-indigo-500/20" },
-        { name: "Bank of Tanzania", logo: "BANK OF TZ", color: "bg-yellow-950/40 text-yellow-500 border-yellow-500/20" },
-        { name: "Tanesco", logo: "TANESCO", color: "bg-green-950/40 text-green-400 border-green-500/20" },
-        { name: "AngloGold Ashanti", logo: "ANGLOGOLD", color: "bg-amber-950/40 text-amber-400 border-amber-500/20" },
-        { name: "Simba Logistics", logo: "SIMBA LOGISTICS", color: "bg-red-950/40 text-red-400 border-red-500/20" },
-        { name: "Puma Energy", logo: "PUMA ENERGY", color: "bg-emerald-950/40 text-emerald-300 border-emerald-500/20" },
-        { name: "Jambo", logo: "JAMBO GROUP", color: "bg-rose-950/40 text-rose-400 border-rose-500/20" },
-        { name: "Siginon Group", logo: "SIGINON GROUP", color: "bg-sky-950/40 text-sky-400 border-sky-500/20" }
+        { name: "Tristar", sub: "Global Transport & Liquids" },
+        { name: "Primefuels", sub: "Regional Fuel Logistics" },
+        { name: "Bakhresa Group", sub: "Azam Food Conglomerate" },
+        { name: "TPC Limited", sub: "Sugar & Agro-Industrial" },
+        { name: "Tanzania Polisi", sub: "National Safety Partner" },
+        { name: "Bank of Tanzania", sub: "Central Bank of TZ" },
+        { name: "Tanesco", sub: "Electric Power Utility" },
+        { name: "AngloGold Ashanti", sub: "Gold Mining Operations" },
+        { name: "Simba Logistics", sub: "Heavy Sourcing & Haulage" },
+        { name: "Puma Energy", sub: "Midstream Retail Fuel" },
+        { name: "Jambo", sub: "Industrial Manufacturing" },
+        { name: "Siginon Group", sub: "Aviation & Logistics" }
       ];
 
 
@@ -1286,181 +1755,217 @@
       // DOM READY BOOTSTRAPPER
       window.addEventListener('DOMContentLoaded', () => {
         // Set copyright year
-        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        const copyYr = document.getElementById('copyright-year');
+        if (copyYr) copyYr.textContent = new Date().getFullYear();
 
         // Inject SVG Logos
-        document.getElementById('header-logo-container').innerHTML = getShieldLogoSVG(42);
-        document.getElementById('hero-mini-logo-container').innerHTML = getShieldLogoSVG(46);
-        document.getElementById('hero-giant-logo-container').innerHTML = getShieldLogoSVG(310);
-        document.getElementById('footer-logo-container').innerHTML = getShieldLogoSVG(40);
+        const headerLogo = document.getElementById('header-logo-container');
+        if (headerLogo) headerLogo.innerHTML = getShieldLogoSVG(42);
+        const heroMiniLogo = document.getElementById('hero-mini-logo-container');
+        if (heroMiniLogo) heroMiniLogo.innerHTML = getShieldLogoSVG(46);
+        const heroGiantLogo = document.getElementById('hero-giant-logo-container');
+        if (heroGiantLogo) heroGiantLogo.innerHTML = getShieldLogoSVG(310);
+        const footerLogo = document.getElementById('footer-logo-container');
+        if (footerLogo) footerLogo.innerHTML = getShieldLogoSVG(40);
 
         // Populate Company about texts
-        document.getElementById('about-summary-text').textContent = companyDetails.aboutSummary;
-        document.getElementById('about-long-text').textContent = companyDetails.aboutLong;
-        document.getElementById('mission-text-quote').textContent = `"${companyDetails.mission}"`;
-        document.getElementById('vision-text-quote').textContent = `"${companyDetails.vision}"`;
-        document.getElementById('strategy-text-para').textContent = companyDetails.strategy;
-        document.getElementById('sustainability-summary').textContent = companyDetails.sustainability;
-        document.getElementById('safety-summary-text').textContent = companyDetails.healthSafety;
+        const abSum = document.getElementById('about-summary-text');
+        if (abSum) abSum.textContent = companyDetails.aboutSummary;
+        const abLong = document.getElementById('about-long-text');
+        if (abLong) abLong.textContent = companyDetails.aboutLong;
+        const missQuote = document.getElementById('mission-text-quote');
+        if (missQuote) missQuote.textContent = `"${companyDetails.mission}"`;
+        const visQuote = document.getElementById('vision-text-quote');
+        if (visQuote) visQuote.textContent = `"${companyDetails.vision}"`;
+        const stratPara = document.getElementById('strategy-text-para');
+        if (stratPara) stratPara.textContent = companyDetails.strategy;
+        const sustSum = document.getElementById('sustainability-summary');
+        if (sustSum) sustSum.textContent = companyDetails.sustainability;
+        const safeSum = document.getElementById('safety-summary-text');
+        if (safeSum) safeSum.textContent = companyDetails.healthSafety;
 
         // Render Mission Points list
         const missionUl = document.getElementById('mission-bullet-points');
-        companyDetails.missionPoints.forEach(point => {
-          const colonIndex = point.indexOf(':');
-          const title = colonIndex !== -1 ? point.substring(0, colonIndex) : '';
-          const desc = colonIndex !== -1 ? point.substring(colonIndex + 1) : point;
-          const li = document.createElement('li');
-          li.className = 'flex items-start gap-2.5 text-xs text-slate-400';
-          li.innerHTML = `
-            <i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 shrink-0 mt-0.5"></i>
-            <span><strong class="text-slate-200 font-semibold">${title}:</strong>${desc}</span>
-          `;
-          missionUl.appendChild(li);
-        });
+        if (missionUl) {
+          companyDetails.missionPoints.forEach(point => {
+            const colonIndex = point.indexOf(':');
+            const title = colonIndex !== -1 ? point.substring(0, colonIndex) : '';
+            const desc = colonIndex !== -1 ? point.substring(colonIndex + 1) : point;
+            const li = document.createElement('li');
+            li.className = 'flex items-start gap-2.5 text-xs text-slate-400';
+            li.innerHTML = `
+              <i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 shrink-0 mt-0.5"></i>
+              <span><strong class="text-slate-200 font-semibold">${title}:</strong>${desc}</span>
+            `;
+            missionUl.appendChild(li);
+          });
+        }
 
         // Render Core Values
         const valuesGrid = document.getElementById('values-grid-container');
-        coreValues.forEach(val => {
-          const card = document.createElement('div');
-          card.id = `value-card-${val.name.toLowerCase().replace(/\s+/g, '-')}`;
-          card.className = "group relative p-6 rounded-2xl bg-[#0e1626]/80 border border-slate-850 hover:border-blue-500/30 hover:bg-[#111a2d] transition-all duration-300 shadow-xl";
-          card.innerHTML = `
-            <div class="absolute top-0 right-0 p-3 opacity-[0.02] group-hover:opacity-[0.06] text-blue-500 transition-opacity">
-              <i data-lucide="${val.icon}" class="w-24 h-24"></i>
-            </div>
-            <div class="flex flex-col gap-4">
-              <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-blue-400 w-fit group-hover:text-blue-300 group-hover:border-slate-700 transition-colors">
-                <i data-lucide="${val.icon}" class="w-5 h-5"></i>
+        if (valuesGrid) {
+          coreValues.forEach(val => {
+            const card = document.createElement('div');
+            card.id = `value-card-${val.name.toLowerCase().replace(/\s+/g, '-')}`;
+            card.className = "group relative p-6 rounded-2xl bg-[#0e1626]/80 border border-slate-850 hover:border-blue-500/30 hover:bg-[#111a2d] transition-all duration-300 shadow-xl";
+            card.innerHTML = `
+              <div class="absolute top-0 right-0 p-3 opacity-[0.02] group-hover:opacity-[0.06] text-blue-500 transition-opacity">
+                <i data-lucide="${val.icon}" class="w-24 h-24"></i>
               </div>
-              <h4 class="font-display font-semibold text-lg text-white group-hover:text-blue-400 transition-colors">${val.name}</h4>
-              <p class="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">${val.desc}</p>
-            </div>
-          `;
-          valuesGrid.appendChild(card);
-        });
+              <div class="flex flex-col gap-4">
+                <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-blue-400 w-fit group-hover:text-blue-300 group-hover:border-slate-700 transition-colors">
+                  <i data-lucide="${val.icon}" class="w-5 h-5"></i>
+                </div>
+                <h4 class="font-display font-semibold text-lg text-white group-hover:text-blue-400 transition-colors">${val.name}</h4>
+                <p class="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">${val.desc}</p>
+              </div>
+            `;
+            valuesGrid.appendChild(card);
+          });
+        }
 
         // Render Core Services
         const servicesGrid = document.getElementById('core-services-list');
-        serviceCategories.forEach(srv => {
-          const card = document.createElement('div');
-          card.id = `service-card-${srv.id}`;
-          card.className = "p-6 rounded-2xl bg-[#0e1626]/80 border border-slate-850 hover:border-blue-500/30 hover:bg-[#111a2d] transition-all duration-300 shadow-xl flex flex-col justify-between h-full group";
-          
-          let detailsHtml = srv.details.map(det => `
-            <li class="flex items-start gap-2 text-xs text-slate-400">
-              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5"></i>
-              <span>${det}</span>
-            </li>
-          `).join('');
+        if (servicesGrid) {
+          serviceCategories.forEach(srv => {
+            const card = document.createElement('div');
+            card.id = `service-card-${srv.id}`;
+            card.className = "p-6 rounded-2xl bg-[#0e1626]/80 border border-slate-850 hover:border-blue-500/30 hover:bg-[#111a2d] transition-all duration-300 shadow-xl flex flex-col justify-between h-full group";
+            
+            let detailsHtml = srv.details.map(det => `
+              <li class="flex items-start gap-2 text-xs text-slate-400">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5"></i>
+                <span>${det}</span>
+              </li>
+            `).join('');
 
-          card.innerHTML = `
-            <div class="space-y-4">
-              <div class="p-3 rounded-xl border w-fit bg-gradient-to-br ${srv.color}">
-                <i data-lucide="${srv.icon}" class="w-5 h-5 text-white"></i>
+            card.innerHTML = `
+              <div class="space-y-4">
+                <div class="p-3 rounded-xl border w-fit bg-gradient-to-br ${srv.color}">
+                  <i data-lucide="${srv.icon}" class="w-5 h-5 text-white"></i>
+                </div>
+                <h3 class="font-display font-semibold text-xl text-white group-hover:text-blue-400 transition-colors">${srv.title}</h3>
+                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans">${srv.desc}</p>
+                <div class="h-px bg-slate-850 my-4"></div>
+                <ul class="space-y-2">${detailsHtml}</ul>
               </div>
-              <h3 class="font-display font-semibold text-xl text-white group-hover:text-blue-400 transition-colors">${srv.title}</h3>
-              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans">${srv.desc}</p>
-              <div class="h-px bg-slate-850 my-4"></div>
-              <ul class="space-y-2">${detailsHtml}</ul>
-            </div>
-            <div class="mt-6 pt-4 border-t border-slate-850 flex items-center justify-between text-xs text-slate-500 group-hover:text-blue-400 transition-colors font-mono">
-              <span>IMG SAFE SYSTEM</span>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
-            </div>
-          `;
-          servicesGrid.appendChild(card);
-        });
+              <div class="mt-6 pt-4 border-t border-slate-850 flex items-center justify-between text-xs text-slate-500 group-hover:text-blue-400 transition-colors font-mono">
+                <span>IMG SAFE SYSTEM</span>
+                <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+              </div>
+            `;
+            servicesGrid.appendChild(card);
+          });
+        }
 
         // Render Product Categories Sidebar
         const sidebar = document.getElementById('product-cat-sidebar');
-        productCategories.forEach(cat => {
-          const btn = document.createElement('button');
-          btn.id = `product-cat-btn-${cat.id}`;
-          btn.onclick = () => selectProductCategory(cat.id);
-          const isSel = selectedProductCat === cat.id;
-          btn.className = `w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-xs sm:text-sm font-medium transition-all duration-300 border ${
-            isSel ? 'bg-blue-950/60 text-blue-400 border-blue-900/40 font-semibold shadow-sm' : 'text-slate-400 hover:text-white hover:bg-slate-900 border-transparent'
-          }`;
-          
-          btn.innerHTML = `
-            <div class="p-1.5 rounded-lg border ${isSel ? 'bg-blue-900/50 border-blue-800/40 text-blue-400' : 'bg-slate-950 border-slate-800 text-slate-400'}">
-              <i data-lucide="${cat.icon}" class="w-4 h-4"></i>
-            </div>
-            <span class="truncate">${cat.name}</span>
-          `;
-          sidebar.appendChild(btn);
-        });
+        if (sidebar) {
+          productCategories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.id = `product-cat-btn-${cat.id}`;
+            btn.onclick = () => selectProductCategory(cat.id);
+            const isSel = selectedProductCat === cat.id;
+            btn.className = `w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-xs sm:text-sm font-medium transition-all duration-300 border ${
+              isSel ? 'bg-blue-950/60 text-blue-400 border-blue-900/40 font-semibold shadow-sm' : 'text-slate-400 hover:text-white hover:bg-slate-900 border-transparent'
+            }`;
+            
+            btn.innerHTML = `
+              <div class="p-1.5 rounded-lg border ${isSel ? 'bg-blue-900/50 border-blue-800/40 text-blue-400' : 'bg-slate-950 border-slate-800 text-slate-400'}">
+                <i data-lucide="${cat.icon}" class="w-4 h-4"></i>
+              </div>
+              <span class="truncate">${cat.name}</span>
+            `;
+            sidebar.appendChild(btn);
+          });
+        }
 
         // Initialize active category view
         renderProductCategoryDetails();
 
         // Render Key Sectors
         const sectorsGrid = document.getElementById('key-sectors-grid');
-        keySectors.forEach((sec, idx) => {
-          const div = document.createElement('div');
-          div.className = "p-5 rounded-xl bg-slate-900/40 border border-slate-850 hover:border-blue-900/60 hover:bg-slate-900/80 transition-all duration-300 flex flex-col gap-3 group shadow-md";
-          div.innerHTML = `
-            <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-blue-400 group-hover:text-blue-300 group-hover:border-slate-700 transition-all w-fit">
-              <i data-lucide="${sec.icon}" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <h4 class="font-display font-medium text-sm text-slate-200 group-hover:text-white transition-colors">${sec.name}</h4>
-              <p class="text-[11px] text-slate-400 leading-normal mt-1 font-sans">${sec.desc}</p>
-            </div>
-          `;
-          sectorsGrid.appendChild(div);
-        });
+        if (sectorsGrid) {
+          keySectors.forEach((sec, idx) => {
+            const div = document.createElement('div');
+            div.className = "p-5 rounded-xl bg-slate-900/40 border border-slate-850 hover:border-blue-900/60 hover:bg-slate-900/80 transition-all duration-300 flex flex-col gap-3 group shadow-md";
+            div.innerHTML = `
+              <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-blue-400 group-hover:text-blue-300 group-hover:border-slate-700 transition-all w-fit">
+                <i data-lucide="${sec.icon}" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="font-display font-medium text-sm text-slate-200 group-hover:text-white transition-colors">${sec.name}</h4>
+                <p class="text-[11px] text-slate-400 leading-normal mt-1 font-sans">${sec.desc}</p>
+              </div>
+            `;
+            sectorsGrid.appendChild(div);
+          });
+        }
 
         // Render Client Badges
         const clientsGrid = document.getElementById('client-badges-grid');
-        clientList.forEach((cl, idx) => {
-          const div = document.createElement('div');
-          div.className = `p-6 rounded-xl border text-center transition-all duration-300 flex flex-col items-center justify-center min-h-[100px] hover:scale-[1.03] shadow-lg ${cl.color}`;
-          div.innerHTML = `
-            <span class="font-display font-bold text-xs tracking-wider block">${cl.logo}</span>
-            <span class="text-[9px] font-mono text-slate-400 uppercase tracking-widest mt-2 block">${cl.name}</span>
-          `;
-          clientsGrid.appendChild(div);
-        });
+        if (clientsGrid) {
+          clientList.forEach((cl, idx) => {
+            const div = document.createElement('div');
+            div.className = "client-placeholder-badge";
+            div.innerHTML = `
+              <div class="mb-3 flex items-center justify-center min-h-[35px]">
+                ${getClientLogoSVG(cl.name)}
+              </div>
+              <span class="font-mono block text-center leading-normal">${cl.sub}</span>
+            `;
+            clientsGrid.appendChild(div);
+          });
+        }
 
         // Populate Contact fields
-        document.getElementById('contact-address-text').textContent = companyDetails.contact.address;
-        document.getElementById('contact-city-po').textContent = `${companyDetails.contact.cityCountry} • ${companyDetails.contact.poBox}`;
+        const contactAddr = document.getElementById('contact-address-text');
+        if (contactAddr) contactAddr.textContent = companyDetails.contact.address;
+        const contactCity = document.getElementById('contact-city-po');
+        if (contactCity) contactCity.textContent = `${companyDetails.contact.cityCountry} • ${companyDetails.contact.poBox}`;
         
         // Render Contact Phones
         const phonesDiv = document.getElementById('contact-phones-list');
-        companyDetails.contact.phones.forEach(ph => {
-          const cleanPh = ph.replace(/\s+/g, '');
-          phonesDiv.innerHTML += `
-            <a href="tel:${cleanPh}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-blue-400 hover:border-blue-800 hover:bg-slate-950 transition shadow-md">
-              <i data-lucide="phone-call" class="w-3.5 h-3.5 text-blue-400 animate-pulse"></i>
-              <span>${ph}</span>
-            </a>
-          `;
-        });
+        if (phonesDiv) {
+          companyDetails.contact.phones.forEach(ph => {
+            const cleanPh = ph.replace(/\s+/g, '');
+            phonesDiv.innerHTML += `
+              <a href="tel:${cleanPh}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-blue-400 hover:border-blue-800 hover:bg-slate-950 transition shadow-md">
+                <i data-lucide="phone-call" class="w-3.5 h-3.5 text-blue-400 animate-pulse"></i>
+                <span>${ph}</span>
+              </a>
+            `;
+          });
+        }
 
         // Render Contact WhatsApps
         const whatsappsDiv = document.getElementById('contact-whatsapps-list');
-        companyDetails.contact.whatsapps.forEach(wa => {
-          const cleanWa = wa.replace(/[+\s]+/g, '');
-          whatsappsDiv.innerHTML += `
-            <a href="https://wa.me/${cleanWa}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#073322]/80 border border-[#0d593c]/50 text-xs text-[#5bf4b3] hover:text-white hover:bg-[#0c4a32] transition shadow-md">
-              <i data-lucide="message-square" class="w-3.5 h-3.5 animate-pulse"></i>
-              <span>WhatsApp Live</span>
-            </a>
-          `;
-        });
+        if (whatsappsDiv) {
+          companyDetails.contact.whatsapps.forEach(wa => {
+            const cleanWa = wa.replace(/[+\s]+/g, '');
+            whatsappsDiv.innerHTML += `
+              <a href="https://wa.me/${cleanWa}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#073322]/80 border border-[#0d593c]/50 text-xs text-[#5bf4b3] hover:text-white hover:bg-[#0c4a32] transition shadow-md">
+                <i data-lucide="message-square" class="w-3.5 h-3.5 animate-pulse"></i>
+                <span>WhatsApp (${wa})</span>
+              </a>
+            `;
+          });
+        }
 
         // Sourcing desk link
         const emailLink = document.getElementById('contact-email-link');
-        emailLink.href = `mailto:${companyDetails.contact.email}?subject=IMG%20Safe%20Sourcing%20Desk`;
-        emailLink.textContent = companyDetails.contact.email;
+        if (emailLink) {
+          emailLink.href = `mailto:${companyDetails.contact.email}?subject=IMG%20Safe%20Sourcing%20Desk`;
+          emailLink.textContent = companyDetails.contact.email;
+        }
 
         // Service focus dropdown
         const selectSrv = document.getElementById('form-serviceType');
-        serviceCategories.forEach(srv => {
-          selectSrv.innerHTML += `<option value="${srv.title}">${srv.title}</option>`;
-        });
+        if (selectSrv) {
+          serviceCategories.forEach(srv => {
+            selectSrv.innerHTML += `<option value="${srv.title}">${srv.title}</option>`;
+          });
+        }
 
         // Load inquiries and render Admin list
         bootstrapInquiries();
@@ -1480,19 +1985,22 @@
         const isScrolled = window.scrollY > 50;
         
         // Sticky Header styling
-        if (isScrolled) {
-          header.className = "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#080e1a]/95 backdrop-blur-md border-b border-slate-800/80 py-3 shadow-lg shadow-black/20";
-        } else {
-          header.className = "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5";
+        if (header) {
+          if (isScrolled) {
+            header.className = "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#080e1a]/95 backdrop-blur-md border-b border-slate-800/80 py-3 shadow-lg shadow-black/20";
+          } else {
+            header.className = "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5";
+          }
         }
 
         // Scroll progress bar width
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
-        document.getElementById('header-scroll-progress').style.width = `${progress}%`;
+        const progressEl = document.getElementById('header-scroll-progress');
+        if (progressEl) progressEl.style.width = `${progress}%`;
 
         // Active navigation tab sync
-        const sections = ['hero', 'about', 'services', 'contact'];
+        const sections = ['hero', 'about', 'services', 'portfolio', 'contact'];
         let activeSecId = 'hero';
         for (const sId of sections) {
           const el = document.getElementById(sId);
@@ -1508,10 +2016,12 @@
         updateActiveNavState(activeSecId);
 
         // Show Back to Top
-        if (window.scrollY > 600) {
-          btt.className = "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-slate-950/90 border border-blue-500/50 hover:border-blue-400 text-blue-400 hover:text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] transition-all duration-300 translate-y-0 opacity-100 pointer-events-auto group cursor-pointer";
-        } else {
-          btt.className = "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-slate-950/90 border border-blue-500/50 hover:border-blue-400 text-blue-400 hover:text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] transition-all duration-300 translate-y-20 opacity-0 pointer-events-none group";
+        if (btt) {
+          if (window.scrollY > 600) {
+            btt.className = "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-slate-950/90 border border-blue-500/50 hover:border-blue-400 text-blue-400 hover:text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] transition-all duration-300 translate-y-0 opacity-100 pointer-events-auto group cursor-pointer";
+          } else {
+            btt.className = "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-slate-950/90 border border-blue-500/50 hover:border-blue-400 text-blue-400 hover:text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.55)] transition-all duration-300 translate-y-20 opacity-0 pointer-events-none group";
+          }
         }
       }
 
@@ -1545,8 +2055,10 @@
       function scrollToSection(id) {
         // Close menu
         isMobileMenuOpen = false;
-        document.getElementById('mobile-nav-panel').classList.add('hidden');
-        document.getElementById('menu-icon').setAttribute('data-lucide', 'menu');
+        const navPanel = document.getElementById('mobile-nav-panel');
+        if (navPanel) navPanel.classList.add('hidden');
+        const menuIcon = document.getElementById('menu-icon');
+        if (menuIcon) menuIcon.setAttribute('data-lucide', 'menu');
         
         const el = document.getElementById(id);
         if (el) {
@@ -1557,7 +2069,7 @@
           window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
         updateActiveNavState(id);
-        lucide.createIcons();
+        if (window.lucide) lucide.createIcons();
       }
 
       function scrollToTop() {
@@ -1571,13 +2083,13 @@
         const panel = document.getElementById('mobile-nav-panel');
         const icon = document.getElementById('menu-icon');
         if (isMobileMenuOpen) {
-          panel.classList.remove('hidden');
-          icon.setAttribute('data-lucide', 'x');
+          if (panel) panel.classList.remove('hidden');
+          if (icon) icon.setAttribute('data-lucide', 'x');
         } else {
-          panel.classList.add('hidden');
-          icon.setAttribute('data-lucide', 'menu');
+          if (panel) panel.classList.add('hidden');
+          if (icon) icon.setAttribute('data-lucide', 'menu');
         }
-        lucide.createIcons();
+        if (window.lucide) lucide.createIcons();
       }
 
 
@@ -1647,6 +2159,7 @@
 
       function renderProductCategoryDetails() {
         const detPanel = document.getElementById('product-category-details-panel');
+        if (!detPanel) return;
         const catObj = productCategories.find(c => c.id === selectedProductCat);
         if (!catObj) return;
 
@@ -1688,40 +2201,54 @@
         // Clear previous error styles and warnings
         const fields = ['name', 'email', 'phone', 'subject', 'message'];
         fields.forEach(f => {
-          document.getElementById(`err-${f}`).textContent = '';
+          const errEl = document.getElementById(`err-${f}`);
+          if (errEl) errEl.textContent = '';
         });
 
         // Fetch inputs
-        const nameVal = document.getElementById('form-name').value.trim();
-        const emailVal = document.getElementById('form-email').value.trim();
-        const phoneVal = document.getElementById('form-phone').value.trim();
-        const serviceTypeVal = document.getElementById('form-serviceType').value;
-        const subjectVal = document.getElementById('form-subject').value.trim();
-        const messageVal = document.getElementById('form-message').value.trim();
+        const nameEl = document.getElementById('form-name');
+        const emailEl = document.getElementById('form-email');
+        const phoneEl = document.getElementById('form-phone');
+        const serviceTypeEl = document.getElementById('form-serviceType');
+        const subjectEl = document.getElementById('form-subject');
+        const messageEl = document.getElementById('form-message');
+
+        const nameVal = nameEl ? nameEl.value.trim() : '';
+        const emailVal = emailEl ? emailEl.value.trim() : '';
+        const phoneVal = phoneEl ? phoneEl.value.trim() : '';
+        const serviceTypeVal = serviceTypeEl ? serviceTypeEl.value : '';
+        const subjectVal = subjectEl ? subjectEl.value.trim() : '';
+        const messageVal = messageEl ? messageEl.value.trim() : '';
 
         // Check validation
         let isValid = true;
         if (!nameVal) {
-          document.getElementById('err-name').textContent = 'Full name is required.';
+          const errEl = document.getElementById('err-name');
+          if (errEl) errEl.textContent = 'Full name is required.';
           isValid = false;
         }
         if (!emailVal) {
-          document.getElementById('err-email').textContent = 'Email address is required.';
+          const errEl = document.getElementById('err-email');
+          if (errEl) errEl.textContent = 'Email address is required.';
           isValid = false;
         } else if (!/\S+@\S+\.\S+/.test(emailVal)) {
-          document.getElementById('err-email').textContent = 'Please enter a valid email address.';
+          const errEl = document.getElementById('err-email');
+          if (errEl) errEl.textContent = 'Please enter a valid email address.';
           isValid = false;
         }
         if (!phoneVal) {
-          document.getElementById('err-phone').textContent = 'Phone number is required.';
+          const errEl = document.getElementById('err-phone');
+          if (errEl) errEl.textContent = 'Phone number is required.';
           isValid = false;
         }
         if (!subjectVal) {
-          document.getElementById('err-subject').textContent = 'Inquiry subject is required.';
+          const errEl = document.getElementById('err-subject');
+          if (errEl) errEl.textContent = 'Inquiry subject is required.';
           isValid = false;
         }
         if (!messageVal) {
-          document.getElementById('err-message').textContent = 'Please type a message.';
+          const errEl = document.getElementById('err-message');
+          if (errEl) errEl.textContent = 'Please type a message.';
           isValid = false;
         }
 
@@ -1730,8 +2257,8 @@
         // Visual loading spinner simulation
         const submitBtn = document.getElementById('form-submit-btn');
         const submitText = document.getElementById('btn-submit-text');
-        submitBtn.disabled = true;
-        submitText.textContent = "Logging inquiry securely...";
+        if (submitBtn) submitBtn.disabled = true;
+        if (submitText) submitText.textContent = "Logging inquiry securely...";
 
         setTimeout(() => {
           // Construct inquiry object
@@ -1752,28 +2279,28 @@
           localStorage.setItem('img_safe_inquiries', JSON.stringify(inquiries));
 
           // Reset fields
-          document.getElementById('form-name').value = '';
-          document.getElementById('form-email').value = '';
-          document.getElementById('form-phone').value = '';
-          document.getElementById('form-subject').value = '';
-          document.getElementById('form-message').value = '';
+          if (nameEl) nameEl.value = '';
+          if (emailEl) emailEl.value = '';
+          if (phoneEl) phoneEl.value = '';
+          if (subjectEl) subjectEl.value = '';
+          if (messageEl) messageEl.value = '';
 
           // Show success banner
           const banner = document.getElementById('form-success-banner');
-          banner.classList.remove('hidden');
-          banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (banner) {
+            banner.classList.remove('hidden');
+            banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => {
+              banner.classList.add('hidden');
+            }, 6000);
+          }
 
           // Refresh button status
-          submitBtn.disabled = false;
-          submitText.textContent = "Log Sourcing Inquiry";
+          if (submitBtn) submitBtn.disabled = false;
+          if (submitText) submitText.textContent = "Log Sourcing Inquiry";
 
           // Reload dashboard inbox list
           renderAdminInquiries();
-
-          // Clear success banner in 5s
-          setTimeout(() => {
-            banner.classList.add('hidden');
-          }, 6000);
 
         }, 800);
       }
@@ -1817,7 +2344,9 @@
         
         // Stats counts
         const newCount = inquiries.filter(i => i.status === 'new').length;
-        statsBadge.textContent = `${newCount} new`;
+        if (statsBadge) statsBadge.textContent = `${newCount} new`;
+
+        if (!container) return;
 
         if (inquiries.length === 0) {
           container.innerHTML = `
@@ -1826,9 +2355,10 @@
               <span>No inquiries logged in the local database.</span>
             </div>
           `;
-          lucide.createIcons();
+          if (window.lucide) lucide.createIcons();
           return;
         }
+
 
         let html = inquiries.map(inq => {
           let statusBadgeClass = "bg-blue-950/60 text-blue-400 border border-blue-900/40";
@@ -1924,6 +2454,431 @@
           chev.className = "w-4 h-4 transition-transform duration-300 rotate-0";
         }
       }
+
+      // ==========================================
+      // HERO CAROUSEL & PARALLAX SCROLLING ENGINE
+      // ==========================================
+      const heroSlides = [
+        {
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.05 AM.jpeg',
+          title: '01. Technical Control Enclosure Audit',
+          location: 'Twiga Cement Quarry Site • Dar es Salaam'
+        },
+        {
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.04 AM.jpeg',
+          title: '02. Height Safety & Fall Protection Audit',
+          location: 'Clinker Kiln Facility • Industrial Zone'
+        },
+        {
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.04 AM (3).jpeg',
+          title: '03. Outdoor Quarry Diagnostic Logging',
+          location: 'Coastal Mining & Aggregate Site'
+        },
+        {
+          image: '/src/assets/images/image1.jpeg',
+          title: '04. Heavy Haulage Fleet Engine Inspection',
+          location: 'Primefuels Fleet Hub • Coast Corridor'
+        },
+        {
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.03 AM.jpeg',
+          title: '05. Workplace Safety Training Workshop',
+          location: 'HeidelbergCement / Twiga Hall'
+        }
+      ];
+
+      let currentHeroIndex = 0;
+      let heroAutoPlayTimer = null;
+
+      function renderHeroSlide(index) {
+        if (index < 0) index = heroSlides.length - 1;
+        if (index >= heroSlides.length) index = 0;
+        currentHeroIndex = index;
+
+        const slide = heroSlides[index];
+        const imgEl = document.getElementById('hero-featured-image');
+        const titleEl = document.getElementById('hero-slide-title');
+        const locEl = document.getElementById('hero-slide-location');
+
+        if (imgEl) imgEl.src = slide.image;
+        if (titleEl) titleEl.textContent = slide.title;
+        if (locEl) locEl.textContent = slide.location;
+
+        const dotsContainer = document.getElementById('hero-slide-dots');
+        if (dotsContainer) {
+          dotsContainer.innerHTML = heroSlides.map((_, i) => `
+            <button onclick="goHeroSlide(${i})" class="h-2 rounded-full transition-all duration-300 ${i === currentHeroIndex ? 'bg-blue-500 w-6' : 'bg-slate-600 w-2 hover:bg-slate-400'}" title="Slide ${i + 1}"></button>
+          `).join('');
+        }
+      }
+
+      function nextHeroSlide() {
+        renderHeroSlide(currentHeroIndex + 1);
+        resetHeroTimer();
+      }
+
+      function prevHeroSlide() {
+        renderHeroSlide(currentHeroIndex - 1);
+        resetHeroTimer();
+      }
+
+      function goHeroSlide(i) {
+        renderHeroSlide(i);
+        resetHeroTimer();
+      }
+
+      function resetHeroTimer() {
+        if (heroAutoPlayTimer) clearInterval(heroAutoPlayTimer);
+        heroAutoPlayTimer = setInterval(() => {
+          renderHeroSlide(currentHeroIndex + 1);
+        }, 5000);
+      }
+
+      // Parallax scroll listener
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const heroParallax = document.getElementById('hero-parallax-container');
+        if (heroParallax && scrolled < 1000) {
+          heroParallax.style.transform = `translateY(${scrolled * 0.12}px)`;
+        }
+      });
+
+      // ==========================================
+      // PORTFOLIO GALLERY & LIGHTBOX MODAL ENGINE
+      // ==========================================
+      const portfolioData = [
+        {
+          id: 'p1',
+          title: 'High Voltage Control Enclosure Inspection',
+          category: 'field-audits',
+          categoryName: 'Field & Electrical',
+          client: 'Twiga Cement',
+          location: 'Dar es Salaam Quarry Site',
+          standard: 'ISO 45001 / NFPA 70E Electrical Safety',
+          status: 'Completed Audit',
+          image: '/src/assets/images/image1.jpeg',
+          description: 'Comprehensive field audit of outdoor primary electrical distribution panel. Verification of insulation resistance, circuit breaker safety cut-offs, grounding integrity, and technician PPE compliance in high-dust cement quarry environment.'
+        },
+        {
+          id: 'p2',
+          title: 'Height Safety Lanyard & Harness Compliance',
+          category: 'height-safety',
+          categoryName: 'Height & Harness',
+          client: 'Clinker Processing Plant',
+          location: 'Coastal Heavy Industrial Zone',
+          standard: 'OSHA 1926.502 Fall Protection',
+          status: '100% Certified',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.00.56 AM (1).jpeg',
+          description: 'Rigorous inspection of double-lanyard energy absorbing safety harnesses, lanyard shock block integrity, overhead anchor cable tensioning, and ladder safety cage compliance for elevated facility operators.'
+        },
+        {
+          id: 'p3',
+          title: 'Outdoors Quarry Field Diagnostic Logging',
+          category: 'field-audits',
+          categoryName: 'Field & Electrical',
+          client: 'Coast Aggregate Mining',
+          location: 'Maziwa Mining Corridor',
+          standard: 'ISO 31000 Risk Management',
+          status: 'Active Monitoring',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.00.56 AM (2).jpeg',
+          description: 'On-site laptop telemetry logging and geofenced risk assessments. Field engineers log structural vibration metrics, dust containment scores, and site hazard alerts directly into the IMG Safe incident database.'
+        },
+        {
+          id: 'p4',
+          title: 'Heavy Haulage Engine Compartment Safety Inspection',
+          category: 'fleet-transport',
+          categoryName: 'Heavy Fleet',
+          client: 'Primefuels Logistics',
+          location: 'Trans-African Transport Yard',
+          standard: 'SANS 10231 Hazmat Fleet Standard',
+          status: 'Pre-Trip Cleared',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.00.56 AM.jpeg',
+          description: 'Open-hood inspection of commercial haul truck power units. Verification of radiator heat shields, battery isolation master switches, hydraulic fluid line insulation, and pre-departure driver safety orientation.'
+        },
+        {
+          id: 'p5',
+          title: 'Workplace Safety Training & Hydraulics Workshop',
+          category: 'classroom-training',
+          categoryName: 'Classroom Training',
+          client: 'HeidelbergCement / Twiga Cement',
+          location: 'Twiga Safety Academy Hall',
+          standard: 'Zero Harm Operating Principles',
+          status: 'Course Completed',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.01 AM.jpeg',
+          description: 'Interactive workforce workshop covering pneumatics pressure release safety, lockout/tagout (LOTO) energy isolation, risk perception, and personal accountability in heavy industrial manufacturing.'
+        },
+        {
+          id: 'p6',
+          title: 'Substation Network Rack & Wiring Insulation Audit',
+          category: 'field-audits',
+          categoryName: 'Field & Electrical',
+          client: 'Substation Control Center',
+          location: 'Kiluvya Substation Terminal',
+          standard: 'IEEE 1584 Arc Flash Safety',
+          status: 'Audit Verified',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.02 AM (1).jpeg',
+          description: 'Field inspection of server rack patch cabling, high-density fiber optic switches, auxiliary earthing, and thermal hotspots inside primary industrial control rooms.'
+        },
+        {
+          id: 'p7',
+          title: 'Pre-Shift Red Dirt Mine Site Toolbox Huddle',
+          category: 'classroom-training',
+          categoryName: 'Toolbox Training',
+          client: 'Gold Mining Operations',
+          location: 'Mara Mining Complex',
+          standard: 'ICMM Safety Framework',
+          status: 'Daily Protocol',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.02 AM.jpeg',
+          description: 'Pre-shift safety huddle on red soil terrain. Field supervisors brief haul road crews on high-visibility PPE enforcement, blind-spot awareness around excavators, and emergency radio callout channels.'
+        },
+        {
+          id: 'p8',
+          title: 'Heavy Transport Driver Safety & Fatigue Alignment',
+          category: 'fleet-transport',
+          categoryName: 'Heavy Fleet',
+          client: 'Tristar Transport',
+          location: 'Mbagala Freight Depot',
+          standard: 'ADR Dangerous Goods Corridor',
+          status: 'Cleared for Transit',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.03 AM (1).jpeg',
+          description: 'Mandatory pre-trip briefing for bulk liquid transport drivers. Focus on driver rest log verification, anti-rollover braking systems, emergency valve shutoffs, and hazmat spill kit readiness.'
+        },
+        {
+          id: 'p9',
+          title: 'Twiga Cement Plant 1-Year Zero LTI Celebration Assembly',
+          category: 'cement-plant',
+          categoryName: 'Cement Plants',
+          client: 'Twiga Cement Works',
+          location: 'Main Factory Courtyard',
+          standard: '365-Day Zero Harm Milestone',
+          status: 'Milestone Achieved',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.03 AM (2).jpeg',
+          description: 'Plant-wide assembly celebrating 1 full year without Lost Time Injuries (LTI). Recognition of safety ambassadors, site hazard reporting champions, and renewed executive commitment to safe production.'
+        },
+        {
+          id: 'p10',
+          title: 'Low-Voltage Switchgear & LOTO Interlock Audit',
+          category: 'field-audits',
+          categoryName: 'Field & Electrical',
+          client: 'Tanesco Interconnection',
+          location: 'Ubungo Power Grid Station',
+          standard: 'IEC 61439 Switchgear Safety',
+          status: 'LOTO Verified',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.03 AM (3).jpeg',
+          description: 'Complete lockout/tagout system validation on high-capacity low-voltage switchgear cabinets. Verification of physical key interlocks, safety padlocks, and zero-voltage proof testing.'
+        },
+        {
+          id: 'p11',
+          title: 'Bulk Fuel Tanker Spill Response Simulation',
+          category: 'fleet-transport',
+          categoryName: 'Heavy Fleet',
+          client: 'Puma Energy Logistics',
+          location: 'Kurasini Fuel Terminal',
+          standard: 'API 1637 Terminal Standard',
+          status: 'Drill Passed',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.03 AM.jpeg',
+          description: 'Simulated high-volume fuel spill containment exercise. Tactical deployment of absorbent booms, rapid emergency valve isolation, and multi-agency response notification protocols.'
+        },
+        {
+          id: 'p12',
+          title: 'Kiln Structure Elevator & Scaffolding Mesh Safety Audit',
+          category: 'height-safety',
+          categoryName: 'Height & Harness',
+          client: 'AngloGold Ashanti Plant',
+          location: 'Clinker Tower Facility',
+          standard: 'BS EN 12811 Scaffolding Standard',
+          status: 'Safety Cleared',
+          image: '/src/assets/images/WhatsApp Image 2026-08-09 at 1.01.04 AM (2).jpeg',
+          description: 'Inspection of elevated scaffolding platforms, toe-boards, fall protection safety netting, and personnel hoist brake mechanisms on multi-level industrial kiln structures.'
+        }
+      ];
+
+      let currentPortfolioFilter = 'all';
+      let currentPortfolioSearch = '';
+      let activeModalIndex = 0;
+      let filteredPortfolioItems = [...portfolioData];
+
+      function renderPortfolioGrid(filter = 'all', search = '') {
+        currentPortfolioFilter = filter;
+        currentPortfolioSearch = search.toLowerCase().trim();
+
+        const filterBtns = document.querySelectorAll('.portfolio-filter-btn');
+        filterBtns.forEach(btn => {
+          btn.className = 'portfolio-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200';
+        });
+        const activeBtn = document.getElementById(`portfolio-filter-${filter}`);
+        if (activeBtn) {
+          activeBtn.className = 'portfolio-filter-btn px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all duration-200 bg-blue-600 text-white shadow-md';
+        }
+
+        filteredPortfolioItems = portfolioData.filter(item => {
+          const matchesCategory = filter === 'all' || item.category === filter;
+          const matchesSearch = !currentPortfolioSearch || 
+            item.title.toLowerCase().includes(currentPortfolioSearch) ||
+            item.client.toLowerCase().includes(currentPortfolioSearch) ||
+            item.location.toLowerCase().includes(currentPortfolioSearch) ||
+            item.categoryName.toLowerCase().includes(currentPortfolioSearch);
+          return matchesCategory && matchesSearch;
+        });
+
+        const countEl = document.getElementById('count-all');
+        if (countEl) countEl.textContent = portfolioData.length;
+
+        const container = document.getElementById('portfolio-grid-container');
+        if (!container) return;
+
+        if (filteredPortfolioItems.length === 0) {
+          container.innerHTML = `
+            <div class="col-span-full py-16 text-center space-y-4 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+              <i data-lucide="image-off" class="w-10 h-10 text-slate-400 mx-auto"></i>
+              <div class="text-sm font-semibold text-slate-700">No operational audit records found</div>
+              <div class="text-xs text-slate-500 font-sans">Try selecting a different filter category or clearing your search term.</div>
+              <button onclick="filterPortfolio('all'); document.getElementById('portfolio-search-input').value='';" class="px-4 py-2 bg-blue-600 text-white text-xs font-mono font-bold rounded-xl uppercase">Reset Filters</button>
+            </div>
+          `;
+          lucide.createIcons();
+          return;
+        }
+
+        container.innerHTML = filteredPortfolioItems.map((item, index) => `
+          <div onclick="openPortfolioModal(${index})" class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between transform hover:-translate-y-1.5">
+            <div class="relative h-56 w-full overflow-hidden bg-slate-900">
+              <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108 filter brightness-[0.95]" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+              
+              <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700 text-blue-400 font-mono text-[10px] font-bold uppercase">
+                ${item.categoryName}
+              </div>
+
+              <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-emerald-950/80 backdrop-blur-md border border-emerald-800 text-emerald-400 font-mono text-[10px] font-bold uppercase flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>${item.status}</span>
+              </div>
+
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-blue-900/40 backdrop-blur-xs">
+                <span class="px-4 py-2 rounded-xl bg-white text-blue-600 font-mono text-xs font-bold uppercase tracking-wider shadow-lg flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                  <i data-lucide="maximize-2" class="w-4 h-4"></i> View Case Study
+                </span>
+              </div>
+            </div>
+
+            <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between text-[11px] font-mono text-slate-500">
+                  <span class="text-blue-600 font-bold uppercase">${item.client}</span>
+                  <span class="flex items-center gap-1 text-slate-400"><i data-lucide="map-pin" class="w-3 h-3 text-slate-400"></i> ${item.location.split('•')[0]}</span>
+                </div>
+                <h3 class="font-display font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                  ${item.title}
+                </h3>
+                <p class="text-xs text-slate-600 font-sans line-clamp-2 leading-relaxed">
+                  ${item.description}
+                </p>
+              </div>
+
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                <span class="truncate max-w-[180px]">${item.standard}</span>
+                <span class="text-blue-600 font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                  Details <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        lucide.createIcons();
+      }
+
+      function filterPortfolio(cat) {
+        renderPortfolioGrid(cat, currentPortfolioSearch);
+      }
+
+      function searchPortfolio(query) {
+        renderPortfolioGrid(currentPortfolioFilter, query);
+      }
+
+      function openPortfolioModal(index) {
+        if (index < 0 || index >= filteredPortfolioItems.length) return;
+        activeModalIndex = index;
+
+        const item = filteredPortfolioItems[index];
+        const modal = document.getElementById('portfolio-lightbox-modal');
+        if (!modal) return;
+
+        const elTitle = document.getElementById('modal-project-title');
+        if (elTitle) elTitle.textContent = item.title;
+        const elCat = document.getElementById('modal-project-category');
+        if (elCat) elCat.textContent = `${item.categoryName} • ${item.client}`;
+        const elImg = document.getElementById('modal-main-image');
+        if (elImg) elImg.src = item.image;
+        const elCap = document.getElementById('modal-caption-text');
+        if (elCap) elCap.textContent = item.title;
+        const elLoc = document.getElementById('modal-location-text');
+        if (elLoc) elLoc.textContent = item.location;
+        const elClient = document.getElementById('modal-client-name');
+        if (elClient) elClient.textContent = item.client;
+        const elStatus = document.getElementById('modal-status-badge');
+        if (elStatus) elStatus.textContent = item.status;
+        const elDetLoc = document.getElementById('modal-detail-location');
+        if (elDetLoc) elDetLoc.textContent = item.location;
+        const elStd = document.getElementById('modal-detail-standard');
+        if (elStd) elStd.textContent = item.standard;
+        const elDesc = document.getElementById('modal-detail-description');
+        if (elDesc) elDesc.textContent = item.description;
+        const elCounter = document.getElementById('modal-counter-indicator');
+        if (elCounter) elCounter.textContent = `${index + 1} / ${filteredPortfolioItems.length}`;
+
+        renderModalThumbnails();
+
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if (window.lucide) lucide.createIcons();
+      }
+
+      function closePortfolioModal() {
+        const modal = document.getElementById('portfolio-lightbox-modal');
+        if (modal) modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+
+      function nextPortfolioModalItem() {
+        let nextIndex = activeModalIndex + 1;
+        if (nextIndex >= filteredPortfolioItems.length) nextIndex = 0;
+        openPortfolioModal(nextIndex);
+      }
+
+      function prevPortfolioModalItem() {
+        let prevIndex = activeModalIndex - 1;
+        if (prevIndex < 0) prevIndex = filteredPortfolioItems.length - 1;
+        openPortfolioModal(prevIndex);
+      }
+
+      function renderModalThumbnails() {
+        const container = document.getElementById('modal-thumbnails-container');
+        if (!container) return;
+
+        container.innerHTML = filteredPortfolioItems.map((item, idx) => `
+          <button onclick="openPortfolioModal(${idx})" class="w-14 h-10 rounded-lg overflow-hidden border-2 transition shrink-0 ${idx === activeModalIndex ? 'border-blue-500 scale-105 opacity-100 shadow-md' : 'border-slate-800 opacity-50 hover:opacity-100'}">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" />
+          </button>
+        `).join('');
+      }
+
+      window.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('portfolio-lightbox-modal');
+        if (modal && !modal.classList.contains('hidden')) {
+          if (e.key === 'Escape') closePortfolioModal();
+          if (e.key === 'ArrowRight') nextPortfolioModalItem();
+          if (e.key === 'ArrowLeft') prevPortfolioModalItem();
+        }
+      });
+
+      // Initialize Hero and Portfolio on Load
+      document.addEventListener('DOMContentLoaded', () => {
+        renderHeroSlide(0);
+        resetHeroTimer();
+        renderPortfolioGrid('all');
+      });
+
     </script>
   </body>
 </html>

@@ -21,8 +21,8 @@ export const companyDetails = {
     cityCountry: "Dar Es Salaam, Tanzania",
     poBox: "P. O. Box 6504",
     phones: ["+255 786 205 254", "+255 762 695 044", "+255 768 613 613"],
-    whatsapps: ["+255 786 205 254", "+255 713 904 813"],
-    email: "info@imgsafeltd.co.tz"
+    whatsapps: ["+255 786 205 254", "+255 768 613 613"],
+    email: "info@imgsafe.co.tz"
   }
 };
 
